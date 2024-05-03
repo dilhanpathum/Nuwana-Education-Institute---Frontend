@@ -29,14 +29,14 @@ function Header() {
         </Dropdown>
         <Navbar.Toggle />
       </div>
-      <Navbar.Collapse className='font-large '>
-        <Navbar.Link href="#" active>
+      <Navbar.Collapse className='text-9xl'>
+        <Navbar.Link href="#" active className='text-blue-950 text-lg'>
           Home
         </Navbar.Link>
-        <Navbar.Link href="#">About</Navbar.Link>
-        <Navbar.Link href="#">Services</Navbar.Link>
-        <Navbar.Link href="#">Virtual Tour</Navbar.Link>
-        <Navbar.Link href="#">Contact</Navbar.Link>
+        <Navbar.Link className='text-lg' href="#">About</Navbar.Link>
+        <Navbar.Link className='text-lg' href="#">Services</Navbar.Link>
+        <Navbar.Link className='text-lg' href="#">Virtual Tour</Navbar.Link>
+        <Navbar.Link className='text-lg' href="#">Contact</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   )
