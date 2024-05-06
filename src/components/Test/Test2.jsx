@@ -1,30 +1,44 @@
-import React, { useRef } from 'react'
-import { QRCodeCanvas } from "qrcode.react"
+import React, { useEffect, useState } from 'react'
+import QrScan from 'react-qr-reader'
 
 function Test2() {
-    const url = "https://anshsaini.com"
+    const [qrscan, setQrscan] = useState('No result');
+    const handleScan = data => {
+        if (data) {
+            setQrscan(data)
+        }
+    }
+    const handleError = err => {
+    console.error(err)
+    }
 
-    const downloadQRCode = () => {
-        const canvas = document.querySelector("#qrcode-canvas")
-        if (!canvas) throw new Error("<canvas> not found in the DOM")
-    
-        const pngUrl = canvas
-          .toDataURL("image/png")
-          .replace("image/png", "image/octet-stream")
-        const downloadLink = document.createElement("a")
-        downloadLink.href = pngUrl
-        downloadLink.download = "QR code.png"
-        document.body.appendChild(downloadLink)
-        downloadLink.click()
-        document.body.removeChild(downloadLink)
-      }
   return (
-    <div className="p-3">
-      <QRCodeCanvas id="qrcode-canvas" level="H" size={300} value={url} />
-      <div className="my-5">
-      <button onClick={downloadQRCode}>Download QR Code</button>
-      </div>
+    <>
+       <div className="App">
+      <h1>QR Scanning Code</h1>
+      {scanResult ? (
+        <div>
+          <p>Success: <a href={scanResult}>{scanResult}</a></p>
+          <p>Serial Number: {scanResult.slice(-16)}</p>
+        </div>
+      ) : (
+        <div>
+          <div id="reader"></div>
+          <p className="center-text">Or enter the serial number manually:</p>
+          <div className="center-input">
+            <input
+              type="text"
+              value={manualSerialNumber}
+              onChange={handleManualSerialNumberChange}
+            />
+            {manualSerialNumber && (
+              <p>Serial Number: {manualSerialNumber.slice(-16)}</p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
+    </>
   )
 }
 

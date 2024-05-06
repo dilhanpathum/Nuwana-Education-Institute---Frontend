@@ -12,22 +12,18 @@ import {
 import Header from "../Navbar/Header";
 import Footer from "../Footer/Footer";
 import HeaderImage from "../../assets/home/b1.jpg"
-import QRCode from 'react-qr-code';
-function Test() {
-  let qrCodeRef = React.createRef();
+import { QrReader } from 'react-qr-reader';
 
-  const downloadQR = () => {
-    const canvas = document.getElementById("myqr");
-    const pngUrl = canvas
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    let downloadLink = document.createElement("a");
-    downloadLink.href = pngUrl;
-    downloadLink.download = "myqr.png";
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-};
+function Test() {
+  const handleScan = data => {
+    if (data) {
+      console.log('Result: ', data);
+    }
+  }
+
+  const handleError = err => {
+    console.error(err);
+  }
   return (
     <>
     <Header/>
@@ -96,8 +92,14 @@ function Test() {
       
     </MDBRow>
     <div>
-      <QRCode id="myqr" name="myqr" value="https://www.example.com" ref={qrCodeRef} />
-      <button onClick={downloadQR}>Download QR Code</button>
+      <QrReader
+        delay={500}
+        onError={handleError}
+        onScan={handleScan}
+        style={{ width: '100%' }}
+        facingMode="environment"
+        videoConstraints={{ aspectRatio: 1 }}
+      />
     </div>
     </div>
     <Footer/>
