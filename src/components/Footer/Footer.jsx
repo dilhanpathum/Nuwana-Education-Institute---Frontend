@@ -5,7 +5,7 @@ function Footer() {
     <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
   <div class="mx-auto max-w-screen-xl text-center">
       <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
-      <img src={Logo} className="mr-3  h-10 sm:h-9" alt="nuwana Logo" />
+      <img src={Logo} className="h-10 mr-3 sm:h-9" alt="nuwana Logo" />
           Nuwana Higher Education  
       </a>
       <p class="my-6 text-gray-500 dark:text-gray-400">Open-source library of over 400+ web components and interactive elements built for better web.</p>
