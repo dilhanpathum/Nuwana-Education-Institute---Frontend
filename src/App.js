@@ -7,6 +7,8 @@ import { CookiesProvider } from "react-cookie";
 import Header from './components/Navbar/Header';
 import Registation from './components/Login/Registation';
 import Profile from './components/UserProfile/Profile';
+import Test from './components/Test/Test';
+import Test2 from './components/Test/Test2';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/SignIn" element={<Login/>}/>
           <Route path="/SignUp" element={<Registation/>}/>
           <Route path='/Profile' element={<Profile/>}/>
+          <Route path='/Test' element={<Test/>}/>
+          <Route path='/Test2' element={<Test2/>}/>
         </Routes>
         
       </Router>
