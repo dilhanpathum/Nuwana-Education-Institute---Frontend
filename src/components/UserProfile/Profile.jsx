@@ -19,25 +19,24 @@ import {
 import Header from '../Navbar/Header';
 import Footer from '../Footer/Footer';
 import ReactApexChart from "react-apexcharts";
-import { QRCodeCanvas } from "qrcode.react"
+
+import QRCode from 'qrcode.react';
 
 export default function Profile() {
   const url = "http://localhost:3000/profile"
 
-  const downloadQRCode = () => {
-    const canvas = document.querySelector("#qrcode-canvas")
-    if (!canvas) throw new Error("<canvas> not found in the DOM")
-
-    const pngUrl = canvas
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream")
-    const downloadLink = document.createElement("a")
-    downloadLink.href = pngUrl
-    downloadLink.download = "QR code.png"
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
-  }
+  const downloadQR = () => {
+    const canvas = document.getElementById("myqr");
+ 
+    var pngUrl = canvas.toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = "myqr.png";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+};
   const [state, setState] = useState({
     series: [
       {
@@ -113,11 +112,12 @@ export default function Profile() {
                 <MDBCardBody className="flex justify-center p-4">
                   <MDBListGroup flush className="rounded-3">
                     <div>
-                      <QRCodeCanvas id="qrcode-canvas" level="H" size={240} value={url} />
-                      
+                      <div className='myqr'>
+                      <QRCode id="myqr"  size={240} value={url} renderAs="canvas"/>
+                      </div>
                       <br></br>
                       <div className='flex justify-center'>
-                        <button onClick={downloadQRCode}>Download QR Code</button>
+                        <button onClick={downloadQR}>Download QR Code</button>
                       </div>
                     </div>
                   </MDBListGroup>
