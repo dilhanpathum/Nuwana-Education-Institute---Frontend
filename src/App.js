@@ -9,6 +9,15 @@ import Registation from './components/Login/Registation';
 import Profile from './components/UserProfile/Profile';
 import Test from './components/Test/Test';
 import Test2 from './components/Test/Test2';
+import "./styles/quiz.css";
+import Home from './components/Test/Home';
+import QuizStepper from './components/Quiz/QuizStepper';
+import Quiz from './components/Quiz/Quiz';
+import Admin from './components/Test/Admin';
+import AddQuestion from './components/Question/AddQuestion';
+import UpdateQuestion from './components/Question/UpdateQuestion';
+import GetAllQuiz from './components/Quiz/GetAllQuiz';
+import QuizResult from './components/Quiz/QuizResult';
 
 function App() {
   return (
@@ -23,6 +32,16 @@ function App() {
           <Route path='/Profile' element={<Profile/>}/>
           <Route path='/Test' element={<Test/>}/>
           <Route path='/Test2' element={<Test2/>}/>
+
+          <Route path="/home" element={<Home />} />
+					<Route path="/quiz-stepper" element={<QuizStepper />} />
+					<Route path="/take-quiz" element={<Quiz />} />
+					<Route path="/admin" element={<Admin />} />
+
+					<Route path="/create-quiz" element={<AddQuestion />} />
+					<Route path="/update-quiz/:id" element={<UpdateQuestion />} />
+					<Route path="/all-quizzes" element={<GetAllQuiz />} />
+					<Route path="/quiz-result" element={<QuizResult />} />
         </Routes>
         
       </Router>

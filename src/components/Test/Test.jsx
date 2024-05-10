@@ -12,7 +12,7 @@ import {
 import Header from "../Navbar/Header";
 import Footer from "../Footer/Footer";
 import HeaderImage from "../../assets/home/b1.jpg"
-import { QrReader } from 'react-qr-reader';
+
 
 function Test() {
   const handleScan = data => {
@@ -91,16 +91,7 @@ function Test() {
       </MDBCol>
       
     </MDBRow>
-    <div>
-      <QrReader
-        delay={500}
-        onError={handleError}
-        onScan={handleScan}
-        style={{ width: '100%' }}
-        facingMode="environment"
-        videoConstraints={{ aspectRatio: 1 }}
-      />
-    </div>
+   
     </div>
     <Footer/>
     </>

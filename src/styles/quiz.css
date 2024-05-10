@@ -1,0 +1,287 @@
+/* Add Question css*/
+body {
+    background-color: #526d82;
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    width: 150%;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.card-title {
+    color: #526d82;
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+    margin: 0;
+    text-align: center;
+}
+
+
+.card-body {
+    padding: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+.form-label .text-info {
+    color: #526d82;
+    font-weight: bold; 
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn-outline-primary {
+    color: #526d82;
+    border-color: #526d82;
+}
+
+.btn-outline-primary:hover {
+    background-color:#526d82;
+    color: #fff;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+.input-group .btn-outline-danger {
+    height: 38px; 
+    width: auto; 
+    padding: 3px 12px; 
+    margin-top: 8px; 
+    
+}
+
+
+.btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-outline-info {
+    color: #526d82;
+    border-color: #526d82;
+}
+
+.btn-outline-info:hover {
+    background-color:#526d82;
+    color: #fff;
+}
+
+.btn-group {
+    margin-top: 20px;
+}
+
+.btn-group button {
+    margin-right: 10px;
+}
+
+/* GetAllQuiz css*/
+body {
+    background-color: #526d82; 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+}
+
+section {
+    background-color: #ffffff; 
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.container {
+    margin: 20px auto; 
+    max-width: 800px; 
+}
+
+
+.container {
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.btn-group {
+    margin-top: 10px;
+}
+h4 {
+    color: black; 
+}
+
+/*nav bar css*/
+
+.navbar {
+    background-color: #526d82; 
+}
+
+.navbar-brand {
+    color: #526d82; 
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    border-color: #526d82; 
+}
+
+.navbar-toggler-icon {
+    background-color: white; 
+}
+
+.nav-link {
+    color: #526d82; 
+    margin-right: 20px;
+}
+
+.nav-link:hover {
+    color: black;
+}
+.navbar-toggler:hover .navbar-toggler-icon {
+    background-color: #526d82; 
+}
+
+/*Quiz Result page css*/
+
+.container_result {
+    background-color: #f8f9fa; 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+    height: 60vh;
+    justify-content: center;
+   
+}
+
+h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.text-info {
+    color: #007bff; 
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #007bff; 
+    border-color: #007bff;
+    
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; 
+    border-color: #0056b3;
+    color: #fff; 
+}
+
+/*Admin page css*/
+
+.container_adminpage {
+    background-color: #f8f9fa; 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 35vh;
+}
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.nav-link {
+    color: #007bff; 
+}
+
+.nav-link:hover {
+    color: #0056b3; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn .admin{
+    color: #fff;
+    background-color: #007bff; 
+    border-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none; 
+}
+
+.btn:hover .admin{
+    background-color: #0056b3; 
+    border-color: #0056b3;
+}
+
+/*Quiz.jsx css*/
+.quiz-container {
+    background-color: #ecf0f5; 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+
+
+
+
+
