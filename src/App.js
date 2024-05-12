@@ -18,6 +18,9 @@ import AddQuestion from './components/Question/AddQuestion';
 import UpdateQuestion from './components/Question/UpdateQuestion';
 import GetAllQuiz from './components/Quiz/GetAllQuiz';
 import QuizResult from './components/Quiz/QuizResult';
+import Form from './components/ContactUs/Form';
+import About from './components/AboutUs/About';
+
 
 function App() {
   return (
@@ -30,8 +33,14 @@ function App() {
           <Route path="/SignIn" element={<Login/>}/>
           <Route path="/SignUp" element={<Registation/>}/>
           <Route path='/Profile' element={<Profile/>}/>
+
           <Route path='/Test' element={<Test/>}/>
           <Route path='/Test2' element={<Test2/>}/>
+
+
+          <Route path='/Form' element={<Form/>}/>
+          <Route path='/About' element={<About/>}/>
+
 
           <Route path="/home" element={<Home />} />
 					<Route path="/quiz-stepper" element={<QuizStepper />} />
@@ -42,6 +51,7 @@ function App() {
 					<Route path="/update-quiz/:id" element={<UpdateQuestion />} />
 					<Route path="/all-quizzes" element={<GetAllQuiz />} />
 					<Route path="/quiz-result" element={<QuizResult />} />
+
         </Routes>
         
       </Router>
