@@ -20,7 +20,13 @@ import GetAllQuiz from './components/Quiz/GetAllQuiz';
 import QuizResult from './components/Quiz/QuizResult';
 import Form from './components/ContactUs/Form';
 import About from './components/AboutUs/About';
+
+import Test3 from './components/Test/Test3';
+import Test4 from './components/Test/Test4';
+import Test5 from './components/Test/Test5';
+
 import Profile2 from './components/UserProfile/Profile2';
+
 
 
 function App() {
@@ -37,7 +43,9 @@ function App() {
           <Route path='/Profile2' element={<Profile2/>}/>
           <Route path='/Test' element={<Test/>}/>
           <Route path='/Test2' element={<Test2/>}/>
-
+          <Route path ="/Test3" element ={<Test3/>}/>
+          <Route path ="/Test4" element ={<Test4/>}/>
+          <Route path ="/Test5" element ={<Test5/>}/>
 
           <Route path='/Form' element={<Form/>}/>
           <Route path='/About' element={<About/>}/>
@@ -52,6 +60,8 @@ function App() {
 					<Route path="/update-quiz/:id" element={<UpdateQuestion />} />
 					<Route path="/all-quizzes" element={<GetAllQuiz />} />
 					<Route path="/quiz-result" element={<QuizResult />} />
+
+          
 
         </Routes>
         
