@@ -26,6 +26,7 @@ import Test4 from './components/Test/Test4';
 import Test5 from './components/Test/Test5';
 
 import Profile2 from './components/UserProfile/Profile2';
+import Leaderboard from './components/Leaderboard/Leaderboard';
 
 
 
@@ -62,7 +63,7 @@ function App() {
 					<Route path="/quiz-result" element={<QuizResult />} />
 
           
-
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
         
       </Router>

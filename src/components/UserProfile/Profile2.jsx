@@ -113,7 +113,7 @@ export default function Profile2() {
                     <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
                         <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
                             <h1 className="px-5 py-3">Attendance Mark : May</h1>
-                            <table class="min-w-full leading-normal">
+                            <table class="min-w-full leading-normal m-0.5">
                                 <thead>
                                     <tr>
                                         <th
