@@ -20,6 +20,7 @@ import GetAllQuiz from './components/Quiz/GetAllQuiz';
 import QuizResult from './components/Quiz/QuizResult';
 import Form from './components/ContactUs/Form';
 import About from './components/AboutUs/About';
+import Profile2 from './components/UserProfile/Profile2';
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
           <Route path="/SignIn" element={<Login/>}/>
           <Route path="/SignUp" element={<Registation/>}/>
           <Route path='/Profile' element={<Profile/>}/>
-
+          <Route path='/Profile2' element={<Profile2/>}/>
           <Route path='/Test' element={<Test/>}/>
           <Route path='/Test2' element={<Test2/>}/>
 
