@@ -1,6 +1,13 @@
 .background{
 
-    background: rgba(0, 0, 0, 0.8) url("../assets/login/background.jpg");
+    background: rgba(0, 0, 0, 0.5) url("../assets/login/background.jpg");
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+.background-1{
+
+    background: rgba(0, 0, 0, 0.8) url("../assets/home/background.jpg");
     background-size: cover;
     background-blend-mode: darken;
 }
