@@ -1,9 +1,9 @@
 import React from "react";
+import Image from "../../assets/dashboard/person1.png"
 
-import { Button } from "flowbite-react";
 function Test4() {
   return (
-    <div class="container max-w-3xl px-4 mx-auto sm:px-8">
+    <div class="container  px-1 mx-auto sm:px-1">
       <div class="py-8">
         <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
           <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
@@ -78,8 +78,8 @@ function Test4() {
                       <div class="flex-shrink-0">
                         <a href="#" class="relative block">
                           <img
-                            alt="profil"
-                            src="/images/person/6.jpg"
+                            alt=""
+                            src={Image}
                             class="mx-auto object-cover rounded-full h-10 w-10 "
                           />
                         </a>

@@ -27,11 +27,14 @@ import Test5 from './components/Test/Test5';
 
 import Profile2 from './components/UserProfile/Profile2';
 import Leaderboard from './components/Leaderboard/Leaderboard';
+import { Sidebar } from 'flowbite-react';
+import Content from './components/Test/Content';
 
 
 
 function App() {
   return (
+    
     <CookiesProvider>
     <Toaster/>
       <Router>
@@ -42,11 +45,21 @@ function App() {
           <Route path="/SignUp" element={<Registation/>}/>
           <Route path='/Profile' element={<Profile/>}/>
           <Route path='/Profile2' element={<Profile2/>}/>
+
+
           <Route path='/Test' element={<Test/>}/>
           <Route path='/Test2' element={<Test2/>}/>
           <Route path ="/Test3" element ={<Test3/>}/>
           <Route path ="/Test4" element ={<Test4/>}/>
           <Route path ="/Test5" element ={<Test5/>}/>
+          <Route path ="/Sidebar" element ={<Sidebar/>}/>
+          <Route path ="/Content" element ={<Content/>}/>
+
+
+          <Route path="/AddQuestion" element={<AddQuestion/>}/>
+      <Route path="/GetAllQuiz" element={<GetAllQuiz/>}/>
+
+
 
           <Route path='/Form' element={<Form/>}/>
           <Route path='/About' element={<About/>}/>
