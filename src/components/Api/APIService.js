@@ -16,7 +16,7 @@ export default class APIService {
 //register user and pass the data to backend
   static RegisterUser(body){
 
-    return fetch('http://127.0.0.1:8000/api/users/', {
+    return fetch(baseUrl+'register', {
      'method' : 'POST',
      headers:{
         'Content-Type' : 'application/json',
