@@ -1,0 +1,106 @@
+/* Add Question css*/
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    width: auto;
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.card-title {
+    color: #526d82;
+    font-size: 1.25rem; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+    margin: 0;
+    text-align: center;
+}
+
+
+.card-body {
+    padding: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+.form-label .text-info {
+    color: #526d82;
+    font-weight: bold; 
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.btn1 {
+    cursor: pointer;
+}
+
+.btn-outline-primary {
+    color: #526d82;
+    border-color: #526d82;
+}
+
+.btn-outline-primary:hover {
+    background-color:#526d82;
+    color: #fff;
+}
+
+.btn-outline-dangers {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-dangers:hover {
+    background-color: #dc3545;
+    color: #fff;
+}
+.input-group .btn-outline-danger {
+    height: 38px; 
+    width: auto; 
+    padding: 3px 12px; 
+    margin-top: 8px; 
+    
+}
+
+
+.btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-outline-info {
+    color: #526d82;
+    border-color: #526d82;
+}
+
+.btn-outline-info:hover {
+    background-color:#526d82;
+    color: #fff
+}
+
+.btn-group {
+    margin-top: 20px;
+}
+
+.btn-group button {
+    margin-right: 10px;
+}
