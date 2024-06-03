@@ -57,7 +57,7 @@ function App() {
 
 
           <Route path="/AddQuestion" element={<AddQuestion/>}/>
-      <Route path="/GetAllQuiz" element={<GetAllQuiz/>}/>
+          <Route path="/GetAllQuiz" element={<GetAllQuiz/>}/>
 
 
 
