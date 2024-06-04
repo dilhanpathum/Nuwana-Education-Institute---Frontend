@@ -78,7 +78,7 @@ function Home() {
 
         <div className='blog-section text-light py-5'>
             <div className='container d-flex flex-column align-items-center'>
-                <h2 className='text-center text-capitalize mb-5'>Latest on the blog</h2>
+                <h2 className='text-center text-capitalize mb-5'>Our teachers</h2>
                 <div className='row g-4'>
                     {blogs.map((blog) => (
                         <div key={blog.id} className='col-md-6 col-lg-4'>
@@ -94,9 +94,7 @@ function Home() {
                         </div>
                     ))}
                 </div>
-                <Link to="/blog">
-                    <button type='button' className='btn btn-danger btn-lg mt-5'>Read More Blogs</button>
-                </Link>
+                
             </div>
         </div>
     </div>
