@@ -29,6 +29,7 @@ import Profile2 from './components/UserProfile/Profile2';
 import Leaderboard from './components/Leaderboard/Leaderboard';
 import { Sidebar } from 'flowbite-react';
 import Content from './components/Test/Content';
+import Gallery from './components/Test/Gallery';
 
 
 
@@ -54,10 +55,10 @@ function App() {
           <Route path ="/Test5" element ={<Test5/>}/>
           <Route path ="/Sidebar" element ={<Sidebar/>}/>
           <Route path ="/Content" element ={<Content/>}/>
-
+          <Route path ="/Gallery" element ={<Gallery/>}/>
 
           <Route path="/AddQuestion" element={<AddQuestion/>}/>
-      <Route path="/GetAllQuiz" element={<GetAllQuiz/>}/>
+          <Route path="/GetAllQuiz" element={<GetAllQuiz/>}/>
 
 
 
