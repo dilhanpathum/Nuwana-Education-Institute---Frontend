@@ -10,7 +10,7 @@ import Profile from './components/UserProfile/Profile';
 import Test from './components/Test/Test';
 import Test2 from './components/Test/Test2';
 import "./styles/quiz.css";
-import Home from './components/Test/Home';
+
 import QuizStepper from './components/Quiz/QuizStepper';
 import Quiz from './components/Quiz/Quiz';
 import Admin from './components/Test/Admin';
@@ -30,6 +30,7 @@ import Leaderboard from './components/Leaderboard/Leaderboard';
 import { Sidebar } from 'flowbite-react';
 import Content from './components/Test/Content';
 import Gallery from './components/Test/Gallery';
+import Home from './components/Home/Home';
 
 
 
@@ -41,12 +42,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/Header" element={<Header/>}/>
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<Home/>}/>
           <Route path="/SignIn" element={<Login/>}/>
           <Route path="/SignUp" element={<Registation/>}/>
           <Route path='/Profile' element={<Profile/>}/>
           <Route path='/Profile2' element={<Profile2/>}/>
-
+          <Route path="/home" element={<Home />} />
 
           <Route path='/Test' element={<Test/>}/>
           <Route path='/Test2' element={<Test2/>}/>
@@ -66,7 +67,7 @@ function App() {
           <Route path='/About' element={<About/>}/>
 
 
-          <Route path="/home" element={<Home />} />
+          
 					<Route path="/quiz-stepper" element={<QuizStepper />} />
 					<Route path="/take-quiz" element={<Quiz />} />
 					<Route path="/admin" element={<Admin />} />
