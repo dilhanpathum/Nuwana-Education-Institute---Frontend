@@ -26,14 +26,15 @@ export default class APIService {
 
   }
 //get loged user datails by token
-  static GetUserDetails(token){
+  static GetUserDetails(token,body){
 
-    return fetch('http://127.0.0.1:8000/user/obtain_auth_token/', {
-     'method' : 'GET',
+    return fetch(baseUrl+'user', {
+     'method' : 'POST',
      headers:{
         'Content-Type' : 'application/json',
-        'Authorization' : `Token ${token}`
+        'Authorization' : `Bearer ${token}`
      },
+     body:JSON.stringify(body)
     }).then(resp => resp.json())
   }
 }
