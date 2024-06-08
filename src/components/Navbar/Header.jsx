@@ -5,7 +5,7 @@ import profile from "../../assets/profile/p2.jpg";
 import { jwtDecode } from "jwt-decode";
 import APIService from "../Api/APIService";
 import { useCookies } from "react-cookie";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
   const [firstName, setFirstName] = useState("");
@@ -14,6 +14,7 @@ function Header() {
   const [role,setRole] = useState("");
   const [token, setToken, removeToken] = useCookies(["mytoken"]);
   const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
     if (token["mytoken"] != null) {
       const emailToken = (jwtDecode(token["mytoken"]).sub);
@@ -33,7 +34,11 @@ function Header() {
       );
     }
   }, []);
-
+  const logoutBtn = () =>{
+    removeToken(['mytoken'])
+    navigate(0)
+    navigate("/home")
+  }
 
   const getNavLinkClass = (path) => {
     return location.pathname === path ? "text-lg text-blue-500" : "text-lg";
@@ -45,7 +50,7 @@ function Header() {
       </Navbar.Brand>
       
       <div className="flex md:order-2">
-      {firstName ? (
+      {token["mytoken"] ? (
         <Dropdown
           arrowIcon={false}
           inline
@@ -60,7 +65,7 @@ function Header() {
           <Dropdown.Item href="/profile">Profile</Dropdown.Item>
         )}
           <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
+          <Dropdown.Item onClick={logoutBtn}>Sign out</Dropdown.Item>
         </Dropdown>
       ):(
         <Navbar.Collapse className="text-9xl">

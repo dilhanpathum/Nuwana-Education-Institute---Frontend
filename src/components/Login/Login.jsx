@@ -7,17 +7,23 @@ import Footer from '../Footer/Footer'
 import { useCookies } from 'react-cookie';
 import APIService from '../Api/APIService'
 import toast from 'react-hot-toast'
+import CheckToken from '../Api/CheckToken';
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
     const [email,setEmail] =useState('')
     const [password,setPassword] = useState('')
     //set token
     const [token, setToken] = useCookies(['mytoken'])
      const [error,setError] = useState('')
-
+     const navigate = useNavigate();
+    
      const loginBtn = () => {
         APIService.LoginUser({email, password})
         .then((resp) => {if(resp.token){
           setToken('mytoken',resp.token)
+          navigate('/home')
+
         }else{
             console.log(resp)
             setError(resp.message)
@@ -38,6 +44,7 @@ const Login = () => {
       }
   return (
     <>
+    <CheckToken/>
   <Header/>
     <section class="bg-gray-50 background dark:bg-gray-900 ">
     <div class=" flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0 ">
@@ -72,7 +79,7 @@ const Login = () => {
                     </div>
                     <button type="submit"  onClick={loginBtn} class="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Don’t have an account yet? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                        Don’t have an account yet? <a href="/signup" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                     </p>
 
             </div>

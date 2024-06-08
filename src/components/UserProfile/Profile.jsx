@@ -124,9 +124,9 @@ export default function Profile() {
                   <p className="mb-1 text-muted">Full Stack Developer</p>
                   <p className="mb-4 text-muted">Bay Area, San Francisco, CA</p>
                   <div className="mb-2 d-flex justify-content-center">
-                    <MDBBtn>Follow</MDBBtn>
+                    <MDBBtn>Edit</MDBBtn>
                     <MDBBtn outline className="ms-1">
-                      Message
+                      Save
                     </MDBBtn>
                   </div>
                 </MDBCardBody>
@@ -159,7 +159,18 @@ export default function Profile() {
                 <MDBCardBody>
                   <MDBRow>
                     <MDBCol sm="3">
-                      <MDBCardText>Full Name</MDBCardText>
+                      <MDBCardText>First Name</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      <MDBCardText className="text-muted">
+                        Johnatan Smith
+                      </MDBCardText>
+                    </MDBCol>
+                  </MDBRow>
+                  <hr />
+                  <MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>Last Name</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
                       <MDBCardText className="text-muted">
@@ -190,27 +201,9 @@ export default function Profile() {
                     </MDBCol>
                   </MDBRow>
                   <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Mobile</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        (098) 765-4321
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Address</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        Bay Area, San Francisco, CA
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
+                  
+                  
+                  
                 </MDBCardBody>
               </MDBCard>
 

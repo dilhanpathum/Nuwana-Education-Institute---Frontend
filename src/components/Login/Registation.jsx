@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import CheckToken from "../Api/CheckToken";
 
 
 function Registation() {
@@ -90,6 +91,7 @@ function Registation() {
   return (
     <>
       <Header />
+      <CheckToken/>
       <section class="bg-gray-50 background dark:bg-gray-900 ">
         <div class=" flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 ">
           <a
@@ -321,7 +323,7 @@ function Registation() {
                   <p class="text-sm font-light mt-4 text-gray-500 dark:text-gray-400">
                     Already have an account?{" "}
                     <a
-                      href="#"
+                      href="/signin"
                       class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
                       Login here
