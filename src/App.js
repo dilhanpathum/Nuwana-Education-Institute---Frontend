@@ -30,9 +30,12 @@ import Leaderboard from './components/Leaderboard/Leaderboard';
 import { Sidebar } from 'flowbite-react';
 import Content from './components/Test/Content';
 
-import Gallery from './components/Test/Gallery';
+import Gallery from './components/Gallery/Gallery';
+
+
 
 import SubjectGradeSelection from './components/Test/SubjectGradeSelection';
+
 
 import Home from './components/Home/Home';
 
@@ -70,7 +73,7 @@ function App() {
 
 
 
-          <Route path='/Form' element={<Form/>}/>
+          <Route path='/contact' element={<Form/>}/>
           <Route path='/About' element={<About/>}/>
 
 

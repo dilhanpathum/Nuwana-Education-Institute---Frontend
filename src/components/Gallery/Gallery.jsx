@@ -8,6 +8,8 @@ import Img3 from '../../assets/gallery/hero-img1.png';
 import Img4 from '../../assets/gallery/aboutus1.jpg';
 import Img5 from '../../assets/gallery/web-development.jpg';
 import Img6 from '../../assets/gallery/kids-learning.jpg';
+import Header from '../Navbar/Header';
+import Footer from '../Footer/Footer';
 
 const Gallery = () => {
 
@@ -50,6 +52,7 @@ setModel(true);
 }
   return (
     <>
+    <Header/>
     <br/>
     <h1 style = {{textAlign: 'center'}}>Image Gallery</h1>
     <div className={model? "model open" : "model"}>
@@ -65,8 +68,9 @@ setModel(true);
     )
 })}
     
-     
+     <br></br>
      </div>
+     <Footer/>
     </>
    
   )

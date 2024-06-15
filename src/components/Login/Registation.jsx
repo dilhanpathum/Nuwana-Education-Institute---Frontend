@@ -3,14 +3,15 @@ import Logo from "../../assets/logo/logo2.png";
 import "../../styles/login.css";
 import Header from "../Navbar/Header";
 import Footer from "../Footer/Footer";
-import { Datepicker } from "flowbite-react";
+
 import { useCookies } from "react-cookie";
 import APIService from "../Api/APIService";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { RadioButton } from "primereact/radiobutton";
+import CheckToken from "../Api/CheckToken";
+
 
 function Registation() {
   const [response, setResponse] = useState([]);
@@ -18,7 +19,13 @@ function Registation() {
   const [gender, setGender] = useState("");
   const [fullname, setFullname] = useState("");
   let navigate = useNavigate();
-
+  if(response.token!=null){
+   
+    toast.success("Registraion Successfully!")
+    navigate("/login")
+    
+  }
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -33,8 +40,36 @@ function Registation() {
   const onSubmit = (data) => {
     console.log(data);
     APIService.RegisterUser(data)
-      .then((resp) => setResponse(resp))
-      .catch((error) => console.log(error));
+      .then((resp) => {
+        if (resp.token) {
+          setResponse(resp);
+        } else {
+          console.log(resp);
+          setError(resp.message);
+          if (resp.email != null) {
+            toast.error(resp.email);
+          }
+          if (resp.password != null) {
+            toast.error(resp.password);
+          }
+          if (resp.firstname != null) {
+            toast.error(resp.firstname);
+          }
+          if (resp.lastname != null) {
+            toast.error(resp.lastname);
+          }
+          if (resp.gender != null) {
+            toast.error(resp.gender);
+          }
+          if (resp.contact != null) {
+            toast.error(resp.contact);
+          }
+          if (resp.message != null) {
+            toast.error(resp.message);
+          }
+        }
+      })
+      .then((error) => console.log(error));
   };
 
   // handle password eye
@@ -56,6 +91,7 @@ function Registation() {
   return (
     <>
       <Header />
+      <CheckToken/>
       <section class="bg-gray-50 background dark:bg-gray-900 ">
         <div class=" flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 ">
           <a
@@ -287,7 +323,7 @@ function Registation() {
                   <p class="text-sm font-light mt-4 text-gray-500 dark:text-gray-400">
                     Already have an account?{" "}
                     <a
-                      href="#"
+                      href="/signin"
                       class="font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
                       Login here

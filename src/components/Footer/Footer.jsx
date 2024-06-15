@@ -11,26 +11,26 @@ function Footer() {
       <p class="my-6 text-gray-500 dark:text-gray-400">Open-source library of over 400+ web components and interactive elements built for better web.</p>
       <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6 ">Home</a>
+              <a href="/" class="mr-4 hover:underline md:mr-6 ">Home</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">About</a>
+              <a href="/about" class="mr-4 hover:underline md:mr-6">About</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6 ">Gallery</a>
+              <a href="/gallery" class="mr-4 hover:underline md:mr-6 ">Gallery</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">Leaderboard</a>
+              <a href="/leaderboard" class="mr-4 hover:underline md:mr-6">Leaderboard</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">Virtual tour</a>
+              <a href="/virtual" class="mr-4 hover:underline md:mr-6">Virtual tour</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">Contact</a>
+              <a href="/contact" class="mr-4 hover:underline md:mr-6">Contact</a>
           </li>
 
       </ul>
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="http://localhost:3000/" class="hover:underline">&nbsp; Nuwana Higher Education Institute</a>. All Rights Reserved.</span>
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="/" class="hover:underline">&nbsp; Nuwana Higher Education Institute</a>. All Rights Reserved.</span>
   </div>
 </footer>
   )
