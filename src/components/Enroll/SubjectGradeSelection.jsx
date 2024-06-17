@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import '../../styles/SubjectGradeSelection.css';
+import Footer from '../Footer/Footer';
+import Header from '../Navbar/Header';
+import CheckToken from '../Api/CheckToken';
 
 const SubjectGradeSelection = ({ onSubmit }) => {
   const [subject, setSubject] = useState('');
@@ -11,6 +14,9 @@ const SubjectGradeSelection = ({ onSubmit }) => {
   };
 
   return (
+    <>
+    <Header/>
+    <CheckToken/>
     <div className="container-form">
       <form className="subject-grade-form" onSubmit={handleSubmit}>
       <h2 className="form-heading">Enroll Class</h2>
@@ -35,6 +41,8 @@ const SubjectGradeSelection = ({ onSubmit }) => {
         <button type="submit" style={{ backgroundColor: '#5A93E0' }}>Submit</button>
       </form>
     </div>
+    <Footer/>
+    </>
   );
 };
 

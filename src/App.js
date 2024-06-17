@@ -34,10 +34,11 @@ import Gallery from './components/Gallery/Gallery';
 
 
 
-import SubjectGradeSelection from './components/Test/SubjectGradeSelection';
+
 
 
 import Home from './components/Home/Home';
+import SubjectGradeSelection from './components/Enroll/SubjectGradeSelection';
 
 
 
@@ -65,7 +66,7 @@ function App() {
           <Route path ="/Sidebar" element ={<Sidebar/>}/>
           <Route path ="/Content" element ={<Content/>}/>
           <Route path ="/Gallery" element ={<Gallery/>}/>
-          <Route path ="/SubjectGradeSelection" element ={<SubjectGradeSelection/>}/>
+          <Route path ="/Enroll" element ={<SubjectGradeSelection/>}/>
 
 
           <Route path="/AddQuestion" element={<AddQuestion/>}/>

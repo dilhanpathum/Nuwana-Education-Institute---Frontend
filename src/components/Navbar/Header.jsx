@@ -44,6 +44,7 @@ function Header() {
     return location.pathname === path ? "text-lg text-blue-500" : "text-lg";
   };
   return (
+    <>
     <Navbar fluid rounded className="bg-gray-100 ">
       <Navbar.Brand href="http://localhost:3000/">
         <img src={Logo} className="h-10 mr-3 sm:h-9" alt="Logo" />
@@ -86,12 +87,16 @@ function Header() {
         <Navbar.Link href="/about" className={getNavLinkClass("/about")}>
           About
         </Navbar.Link>
+        {token["mytoken"] && role === "student" && (
+          <>
         <Navbar.Link href="/enroll" className={getNavLinkClass("/enroll")}>
           Enroll
         </Navbar.Link>
         <Navbar.Link href="/quiz" className={getNavLinkClass("/quiz")}>
           Quiz
         </Navbar.Link>
+        </>
+        )}
         <Navbar.Link href="/leaderboard" className={getNavLinkClass("/leaderboard")}>
           Leaderboard
         </Navbar.Link>
@@ -106,6 +111,7 @@ function Header() {
         </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
+    </>
   );
 }
 

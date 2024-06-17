@@ -21,9 +21,11 @@ export default function CheckToken() {
 
             })
             .catch((error) => 
-    
+
               removeToken(["mytoken"])
           );
+        }else{
+          navigate('/home')
         }
       }, []);
 }
