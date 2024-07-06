@@ -21,7 +21,7 @@ export default function CheckToken() {
 
             })
             .catch((error) => 
-    
+
               removeToken(["mytoken"])
           );
         }

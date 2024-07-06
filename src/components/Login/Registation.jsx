@@ -22,7 +22,7 @@ function Registation() {
   if(response.token!=null){
    
     toast.success("Registraion Successfully!")
-    navigate("/login")
+    navigate("/signin")
     
   }
   const [error, setError] = useState("");

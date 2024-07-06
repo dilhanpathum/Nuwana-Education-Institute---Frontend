@@ -37,4 +37,29 @@ export default class APIService {
      body:JSON.stringify(body)
     }).then(resp => resp.json())
   }
+
+  static Enroll(token,body){
+
+    return fetch(baseUrl+'enroll', {
+     'method' : 'POST',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+     body:JSON.stringify(body)
+    }).then(resp => resp.json())
+
+  }
+
+
+  static GetStudents(token){
+
+    return fetch(baseUrl+'students', {
+     'method' : 'GET',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+    }).then(resp => resp.json())
+  }
 }

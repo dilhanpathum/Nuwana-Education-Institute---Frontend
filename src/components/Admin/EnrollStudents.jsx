@@ -1,8 +1,11 @@
 import React from "react";
 import Image from "../../assets/dashboard/person1.png"
+import Content from "./Content";
 
-function Test4() {
+function EnrollStudents() {
   return (
+    <>
+
     <div class="container  px-1 mx-auto sm:px-1">
       <div class="py-8">
         <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
@@ -124,7 +127,8 @@ function Test4() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
-export default Test4;
+export default EnrollStudents;
