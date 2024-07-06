@@ -24,8 +24,6 @@ export default function CheckToken() {
 
               removeToken(["mytoken"])
           );
-        }else{
-          navigate('/home')
         }
       }, []);
 }

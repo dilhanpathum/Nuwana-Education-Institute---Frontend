@@ -51,10 +51,11 @@ function ChooseSection() {
                         </div>
                         <Card.Body>
                             <Card.Title className='mb-3 text-center text-capitalize'>
-                                Certificates Received
+                            Enhance Academic Excellence
                             </Card.Title>
                             <Card.Text className='text-center'>
-                            Nuwana Education Institute is proud to have received numerous certificates and accolades for our commitment to excellence in education. These recognitions reflect our dedication to high-quality teaching, innovative methods, and outstanding student achievements, solidifying our reputation as a leading educational institute.
+                            
+At Nuwana Education Institute, we are committed to enhancing academic excellence. Our unique online quiz platform and dynamic feedback system ensure that students receive personalized, immediate insights into their performance. This innovative approach helps students master concepts more effectively and achieve their academic goals.
                             </Card.Text>
                         </Card.Body>
                     </Card>

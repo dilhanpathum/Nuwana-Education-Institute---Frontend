@@ -5,30 +5,30 @@ import ChooseSection from '../ChooseSection/ChooseSection';
 import StartCoursesImg from '../../assets/home/b4.jpg';
 
 import { Card } from 'react-bootstrap';
-import Blog1Img from '../../assets/home/b1.jpg';
-import Blog2Img from '../../assets/home/b2.jpg';
-import Blog3Img from '../../assets/home/b3.jpg';
+
 import Header from '../Navbar/Header';
 import Footer from '../Footer/Footer';
-
+import teacher1 from '../../assets/teachers/t1.jpg'
+import teacher2 from '../../assets/teachers/t2.jpg'
+import teacher3 from '../../assets/teachers/t3.jpg'
 const blogs = [
     {
         id: 1,
-        img: [Blog1Img],
-        title: 'Math Teacher: Mr. Nuwan jayasiri',
+        img: [teacher1],
+        title: 'Mathematics Teacher: Mr. Nuwan Jayasiri',
         description: 'Meet Mr. Nuwan jayasiri, our expert Math teacher for Grade 10 and 11. With over 15 years of teaching experience, Mr. Smith is dedicated to making math understandable and enjoyable. His innovative teaching methods and personalized approach help students grasp complex concepts and excel in their studies.'
     },
     {
         id: 2,
-        img: [Blog2Img],
-        title: 'Blog 2',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, fugit? Doloremque deserunt ipsum eaque, dolor tempore, minima nisi debitis, et quas voluptatibus nam ex. Necessitatibus eligendi ratione expedita! Porro, ut.'
+        img: [teacher2],
+        title: 'Science Teacher: Mr. Kapila Jayantha',
+        description: "Introducing Mr. Kapila Jayantha, our passionate Science teacher for Grade 10 and 11. With a Master's degree in Science Education and a decade of teaching experience, Ms. Davis brings the subject to life through hands-on experiments and engaging lessons, inspiring students to explore the wonders of science. "
     },
     {
         id: 3,
-        img: [Blog3Img],
-        title: 'Blog 3',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, fugit? Doloremque deserunt ipsum eaque, dolor tempore, minima nisi debitis, et quas voluptatibus nam ex. Necessitatibus eligendi ratione expedita! Porro, ut.'
+        img: [teacher3],
+        title: 'English Teacher: Mrs. Niluka Dilrukshi',
+        description: 'Welcome Mrs. Niluka Dilrukshi, our dedicated English teacher for Grade 10 and 11. With a background in English Literature and 12 years of teaching experience, Mrs. Johnson fosters a love for language and literature. Her dynamic lessons and supportive approach help students develop strong reading and writing skills.'
     }
 ];
 function Home() {

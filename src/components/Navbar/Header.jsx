@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../../assets/logo/logo1.png";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import profile from "../../assets/profile/p2.jpg";
+import profile from "../../assets/profile/p3.jpg";
 import { jwtDecode } from "jwt-decode";
 import APIService from "../Api/APIService";
 import { useCookies } from "react-cookie";

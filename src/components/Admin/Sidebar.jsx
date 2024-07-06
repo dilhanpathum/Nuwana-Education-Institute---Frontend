@@ -7,7 +7,7 @@ import { BiBookAlt,
     BiTask,
     BiHelpCircle, 
 } from 'react-icons/bi';
-import '../styles/sidebar.css'
+import '../../styles/sidebar.css'
 
 import  { useState, useEffect } from 'react';
 
@@ -23,47 +23,46 @@ const Sidebar = () => {
         
         // Update activeItem based on the current path
         switch (currentPath) {
-            case '/Test4':
+            case '/admin/enrollstudents':
                 setActiveItem('Assignment');
                 break;
-                case '/Test5':
+                case '/admin/students':
                 setActiveItem('Dashboard');
+                break;
+                case '/admin/AddQuestion':
+                setActiveItem('QuizManage');
+                break;
+                case '/admin/qrscan':
+                setActiveItem('QRScanner');
                 break;
         }
     }, []);
 
     return (
         <div className='menu'>
-            <div className='logo'>
+            {/* <div className='logo'>
                 <BiBookAlt className='logo-icon'/>
                 <h2>Nuwana</h2>
-            </div>
+            </div> */}
 
             <div className='menu--list'>
-                <a href='http://localhost:3000/Test5' className={activeItem === 'Dashboard' ? 'item active' : 'item'}>
+                <a href='http://localhost:3000/admin/students' className={activeItem === 'Dashboard' ? 'item active' : 'item'}>
                     <BiHome className='logo-icon'/>
                     Dashboard
                 </a>
-                <a href='http://localhost:3000/Test4' className={activeItem === 'Assignment' ? 'item active' : 'item'}>
+                <a href='http://localhost:3000/admin/enrollstudents' className={activeItem === 'Assignment' ? 'item active' : 'item'}>
                     <BiTask className='icon'/>
                     Assignment
                 </a>
-                <a href='http://localhost:3000/AddQuestion' className='item'>
+                <a href='http://localhost:3000/admin/AddQuestion' className={activeItem === 'QuizManage' ? 'item active' : 'item'}>
                     <BiSolidReport className='icon'/>
                    Quiz Manage
                 </a>
-                <a href='#' className='item'>
+                <a href='http://localhost:3000/admin/qrscan' className={activeItem === 'QRScanner' ? 'item active' : 'item'}>
                     <BiStats className='icon'/>
-                   Stats
+                   Qr Scanner
                 </a>
-                <a href='#' className='item'>
-                    <BiMessage className='icon'/>
-                    Message
-                </a>
-                <a href='#' className='item'>
-                    <BiHelpCircle className='icon'/>
-                    Help
-                </a>
+                
 
             </div>
         </div>

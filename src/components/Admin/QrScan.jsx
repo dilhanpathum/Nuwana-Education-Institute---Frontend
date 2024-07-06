@@ -3,7 +3,7 @@ import QRScanner from '../QRScanner/QRScanner'
 
 
 
-function Test2() {
+function QrScan() {
     
   return (
     <>
@@ -15,4 +15,4 @@ function Test2() {
   )
 }
 
-export default Test2
+export default QrScan

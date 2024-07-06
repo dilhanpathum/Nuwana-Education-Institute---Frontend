@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { deleteQuestion, getAllQuestions } from "../../components/Test/QuizService"
+import { deleteQuestion, getAllQuestions } from "../Admin/QuizService"
 
 import { Link } from "react-router-dom"
 import {FaPlus} from "react-icons/fa"
@@ -46,12 +46,12 @@ const GetAllQuiz = () => {
 
 	return (
 		<section className="container">
-			<div className="row mt-5">
-				<div className="col-md-6 mb-2 md-mb-0" style={{ color: "GrayText" }}>
+			<div className="mt-5 row">
+				<div className="mb-2 col-md-6 md-mb-0" style={{ color: "GrayText" }}>
 					<h4>All Quiz Questions</h4>
 				</div>
 				<div >
-					<Link to={"/AddQuestion"} className="py-2 px-4  bg-blue-500 hover:bg-blue-500 focus:ring-blue-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg">
+					<Link to={"/AddQuestion"} className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-500 focus:ring-blue-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
 						 Add Question
 					</Link>
 				</div>
@@ -72,9 +72,9 @@ const GetAllQuiz = () => {
 						))}
 					</ul>
 					<p className="text-success">Correct Answer: {question.correctAnswers}</p>
-					<div className="btn-group mb-4">
+					<div className="mb-4 btn-group">
 						<Link to={`/update-quiz/${question.id}`}>
-							<button className="btn btn-sm btn-outline-warning mr-2">Edit Question</button>
+							<button className="mr-2 btn btn-sm btn-outline-warning">Edit Question</button>
 						</Link>
 						<button
 							className="btn btn-sm btn-outline-danger"

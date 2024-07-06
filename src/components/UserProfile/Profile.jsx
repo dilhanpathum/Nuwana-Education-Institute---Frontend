@@ -21,7 +21,7 @@ import Footer from "../Footer/Footer";
 import ReactApexChart from "react-apexcharts";
 import '../../styles/profilepic.css'
 import QRCode from "qrcode.react";
-
+import profilePic from '../../assets/profile/p3.jpg'
 export default function Profile() {
   var loadFile = function (event) {
     var image = document.getElementById("output");
@@ -116,13 +116,13 @@ export default function Profile() {
                     </label>
                     <input id="file" type="file" name="propic" accept=".png, .jpg, .jpeg" onchange={loadFile}/>
                     <img
-                      src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
+                      src={profilePic}
                       id="output"
                       width="200"
                     />
                   </div>
-                  <p className="mb-1 text-muted">Full Stack Developer</p>
-                  <p className="mb-4 text-muted">Bay Area, San Francisco, CA</p>
+                  <p className="mb-1 text-muted">Student</p>
+
                   <div className="mb-2 d-flex justify-content-center">
                     <MDBBtn>Edit</MDBBtn>
                     <MDBBtn outline className="ms-1">
@@ -163,7 +163,7 @@ export default function Profile() {
                     </MDBCol>
                     <MDBCol sm="9">
                       <MDBCardText className="text-muted">
-                        Johnatan Smith
+                        Dilhan
                       </MDBCardText>
                     </MDBCol>
                   </MDBRow>
@@ -174,7 +174,7 @@ export default function Profile() {
                     </MDBCol>
                     <MDBCol sm="9">
                       <MDBCardText className="text-muted">
-                        Johnatan Smith
+                        Pathum
                       </MDBCardText>
                     </MDBCol>
                   </MDBRow>
@@ -185,7 +185,7 @@ export default function Profile() {
                     </MDBCol>
                     <MDBCol sm="9">
                       <MDBCardText className="text-muted">
-                        example@example.com
+                        dilhan.jayasiri@gmail.com
                       </MDBCardText>
                     </MDBCol>
                   </MDBRow>
@@ -196,7 +196,7 @@ export default function Profile() {
                     </MDBCol>
                     <MDBCol sm="9">
                       <MDBCardText className="text-muted">
-                        (097) 234-5678
+                        (071) 2345678
                       </MDBCardText>
                     </MDBCol>
                   </MDBRow>
