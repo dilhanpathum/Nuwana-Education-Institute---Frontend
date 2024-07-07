@@ -1,6 +1,8 @@
 import React from "react"
 import { useLocation} from "react-router-dom"
 import "../../styles/quiz.css";
+import Header from "../Navbar/Header";
+import Footer from "../Footer/Footer";
  const QuizResult = () => {
 		const location = useLocation()
 		const { quizQuestions, totalScores } = location.state
@@ -12,6 +14,8 @@ import "../../styles/quiz.css";
 		}
 
 		return (
+			<>
+			<Header/>
 			<section className="container_result mt-5">
 				<h3>Your Quiz Result Summary</h3>
 				<hr />
@@ -24,6 +28,8 @@ import "../../styles/quiz.css";
 					Retake this quiz
 				</button>
 			</section>
+			<Footer/>
+			</>
 		)
  }
 

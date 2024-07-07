@@ -23,10 +23,10 @@ const Sidebar = () => {
         
         // Update activeItem based on the current path
         switch (currentPath) {
-            case '/admin/enrollstudents':
+            case '/admin/students':
                 setActiveItem('Assignment');
                 break;
-                case '/admin/students':
+                case '/admin/enrollstudents':
                 setActiveItem('Dashboard');
                 break;
                 case '/admin/AddQuestion':
@@ -46,13 +46,13 @@ const Sidebar = () => {
             </div> */}
 
             <div className='menu--list'>
-                <a href='http://localhost:3000/admin/students' className={activeItem === 'Dashboard' ? 'item active' : 'item'}>
+                <a href='http://localhost:3000/admin/enrollstudents' className={activeItem === 'Dashboard' ? 'item active' : 'item'}>
                     <BiHome className='logo-icon'/>
-                    Dashboard
+                    Students
                 </a>
-                <a href='http://localhost:3000/admin/enrollstudents' className={activeItem === 'Assignment' ? 'item active' : 'item'}>
+                <a href='http://localhost:3000/admin/students' className={activeItem === 'Assignment' ? 'item active' : 'item'}>
                     <BiTask className='icon'/>
-                    Assignment
+                    Pending
                 </a>
                 <a href='http://localhost:3000/admin/AddQuestion' className={activeItem === 'QuizManage' ? 'item active' : 'item'}>
                     <BiSolidReport className='icon'/>

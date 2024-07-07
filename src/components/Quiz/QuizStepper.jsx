@@ -2,21 +2,23 @@ import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getSubjects } from "../QuizOptions/QuizService"
 import "../../styles/quiz.css";
-
+import { useCookies } from "react-cookie";
+import Header from "../Navbar/Header";
+import Footer from "../Footer/Footer";
  const QuizStepper = () => {
 		const [currentStep, setCurrentStep] = useState(1)
 		const [selectedSubject, setSelectedSubject] = useState("")
-		const [selectedNumQuestions, setSelectedNumQuestions] = useState("")
+		const [selectedNumQuestions, setSelectedNumQuestions] = useState(5)
 		const [subjects, setSubjects] = useState([])
 		const navigate = useNavigate()
-
+		const [token, setToken, removeToken] = useCookies(["mytoken"]);
 		useEffect(() => {
 			fetchSubjectData()
 		}, [])
 
 		const fetchSubjectData = async () => {
 			try {
-				const subjectsData = await getSubjects()
+				const subjectsData = await getSubjects(token["mytoken"])
 				setSubjects(subjectsData)
 			} catch (error) {
 				console.error(error)
@@ -24,7 +26,7 @@ import "../../styles/quiz.css";
 		}
 
 		const handleNext = () => {
-			if (currentStep === 3) {
+			if (currentStep === 2) {
 				if (selectedSubject && selectedNumQuestions) {
 					navigate("/take-quiz", { state: { selectedNumQuestions, selectedSubject } })
 				} else {
@@ -51,6 +53,7 @@ import "../../styles/quiz.css";
 			switch (currentStep) {
 				case 1:
 					return (
+						
 						<div>
 							<h3 className="text-info mb-2">I want to take a quiz on :</h3>
 							<select
@@ -66,20 +69,20 @@ import "../../styles/quiz.css";
 							</select>
 						</div>
 					)
+				// case 2:
+				// 	return (
+				// 		<div>
+				// 			<h4 className="text-info mb-2">How many questions would you like to attempt ?</h4>
+				// 			<input
+				// 				type="number"
+				// 				className="form-control"
+				// 				value={selectedNumQuestions}
+				// 				onChange={handleNumQuestionsChange}
+				// 				placeholder="Enter the number of questions"
+				// 			/>
+				// 		</div>
+				// 	)
 				case 2:
-					return (
-						<div>
-							<h4 className="text-info mb-2">How many questions would you like to attempt ?</h4>
-							<input
-								type="number"
-								className="form-control"
-								value={selectedNumQuestions}
-								onChange={handleNumQuestionsChange}
-								placeholder="Enter the number of questions"
-							/>
-						</div>
-					)
-				case 3:
 					return (
 						<div className="confirmaton">
 							<h2>Confirmation</h2>
@@ -93,7 +96,7 @@ import "../../styles/quiz.css";
 		}
 
 		const renderProgressBar = () => {
-			const progress = currentStep === 3 ? 100 : ((currentStep - 1) / 2) * 100
+			const progress = currentStep === 2 ? 100 : ((currentStep - 1) / 2) * 100
 			return (
 				<div className="progress">
 					<div
@@ -108,6 +111,8 @@ import "../../styles/quiz.css";
 		}
 
 		return (
+			<>
+			<Header/>
 			<section className="mt-5">
 				<h3 style={{ color: "GrayText" }} className="mb-4">
 					Welcome to online quiz 
@@ -122,7 +127,7 @@ import "../../styles/quiz.css";
 									Previous
 								</button>
 							)}
-							{currentStep < 3 && (
+							{currentStep < 2 && (
 								<button
 									className="btn btn-primary"
 									onClick={handleNext}
@@ -133,7 +138,7 @@ import "../../styles/quiz.css";
 									Next
 								</button>
 							)}
-							{currentStep === 3 && (
+							{currentStep === 2 && (
 								<button className="btn btn-success" onClick={handleNext}>
 									Start Quiz
 								</button>
@@ -142,6 +147,8 @@ import "../../styles/quiz.css";
 					</div>
 				</div>
 			</section>
+			<Footer/>
+			</>
 		)
  }
 

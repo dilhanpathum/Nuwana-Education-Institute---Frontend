@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import "../../styles/addQuestion.css"
 import { Link } from "react-router-dom"
 import { createQuestion, getSubjects } from "../Admin/QuizService"
-
+import { useCookies } from "react-cookie";
 
 const AddQuestion = () => {
 	const [question, setQuestionText] = useState("")
@@ -12,14 +12,14 @@ const AddQuestion = () => {
 	const [subject, setSubject] = useState("")
 	const [newSubject, setNewSubject] = useState("")
 	const [subjectOptions, setSubjectOptions] = useState([""])
-
+	const [token, setToken, removeToken] = useCookies(["mytoken"]);
 	useEffect(() => {
 		fetchSubjects()
 	}, [])
 
 	const fetchSubjects = async () => {
 		try {
-			const subjectsData = await getSubjects()
+			const subjectsData = await getSubjects(token["mytoken"])
 			setSubjectOptions(subjectsData)
 		} catch (error) {
 			console.error(error)
@@ -56,21 +56,23 @@ const AddQuestion = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		console.log(correctAnswers)
 		try {
 			const result = {
 				question,
 				questionType,
 				choices,
-				correctAnswers: correctAnswers.map((answer) => {
-					const choiceLetter = answer.charAt(0).toUpperCase()
-					const choiceIndex = choiceLetter.charCodeAt(0) - 65
-					return choiceIndex >= 0 && choiceIndex < choices.length ? choiceLetter : null
-				}),
+				correctAnswers: correctAnswers,
+				// correctAnswers: correctAnswers.map((answer) => {
+				// 	const choiceLetter = answer.charAt(0).toUpperCase();
+				// 	const choiceIndex = choiceLetter.charCodeAt(0) - 65; 
+				// 	return choiceIndex >= 0 && choiceIndex < choices.length ? choiceLetter : null;
+				//   }),
 
 				subject
 			}
-
-			await createQuestion(result)
+			console.log(result)
+			await createQuestion(result,token["mytoken"])
 
 			setQuestionText("")
 			setQuestionType("single")
@@ -95,7 +97,7 @@ const AddQuestion = () => {
 
 <div className="flex justify-end">
 				
-				<Link to={"/GetAllQuiz"} className="right-0 px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
+				<Link to={"/admin/GetAllQuiz"} className="right-0 px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
 					Manage existing Quizzes
 				</Link>
 			</div>
@@ -250,7 +252,7 @@ const AddQuestion = () => {
 									<button type="submit" className="px-6 py-2 text-green-500 transition duration-200 ease-in border-2 border-green-500 hover:bg-green-500 hover:text-white focus:outline-none">
 										Save Question
 									</button>
-									<Link to={"/all-quizzes"} >
+									<Link to={"/admin/GetAllQuiz"} >
 										<button className="px-6 py-2 text-blue-500 transition duration-200 ease-in border-2 border-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none">Back to existing questions</button>
 									</Link>
 								</div>
