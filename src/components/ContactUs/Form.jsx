@@ -57,8 +57,8 @@ const handleSubmit = (e) => {
                         <div className="col-md-4">
                             <div className="bg-gray-300 d-flex flex-column justify-content-center p-4">
                                 <h5 className="text-uppercase"> Open Hours </h5>
-                                <p className="m-0"><i className="fa fa-clock text-primary me-2" aria-hidden="true"  ></i> Sunday-Friday:
-08:00 AM - 09.00 PM</p>
+                                <p className="m-0"><i className="fa fa-clock text-primary me-2" aria-hidden="true"  ></i> Saterday-SUnday:
+07:00 AM - 09.00 PM</p>
                             </div>
                         </div>
                     </div>

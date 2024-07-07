@@ -3,8 +3,10 @@ import Logo from "../../assets/logo/logo1.png";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import profile from "../../assets/profile/p3.jpg";
 import { jwtDecode } from "jwt-decode";
-import APIService from "../Api/APIService";
 import { useCookies } from "react-cookie";
+import APIService from "../Api/APIService";
+import profile1 from "../../assets/profile/p1.jpg";
+import profile2 from "../../assets/profile/p4.png";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Header() {
@@ -36,9 +38,23 @@ function Header() {
   }, []);
   const logoutBtn = () =>{
     removeToken(['mytoken'])
+    navigate("/home")
     navigate(0)
     navigate("/home")
   }
+
+  const getProfileImage = (role) => {
+    switch (role) {
+      case "teacher-m":
+        return profile1;
+      case "student":
+        return profile;
+      case "admin":
+        return profile2;
+      default:
+        return profile2;
+    }
+  };
 
   const getNavLinkClass = (path) => {
     return location.pathname === path ? "text-lg text-blue-500" : "text-lg";
@@ -55,13 +71,17 @@ function Header() {
         <Dropdown
           arrowIcon={false}
           inline
-          label={<Avatar alt="User settings" img={profile} rounded />}
+          label={<Avatar
+            alt="User settings"
+            img={getProfileImage(role)} // Get the profile image based on role
+            rounded
+          />}
         >
           <Dropdown.Header>
             <span className="block text-sm">{`${firstName} ${lastName}`}</span>
           </Dropdown.Header>
-        {role === 'admin' ?(
-          <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
+        {role === "admin" || role === "teacher-m" ?(
+          <Dropdown.Item href="/admin/enrollstudents">Dashboard</Dropdown.Item>
         ):(
           <Dropdown.Item href="/profile">Profile</Dropdown.Item>
         )}
@@ -70,10 +90,10 @@ function Header() {
         </Dropdown>
       ):(
         <Navbar.Collapse className="text-9xl">
-          <Navbar.Link className="text-lg" href="/signin">
+          <Navbar.Link className={getNavLinkClass("/signin")} href="/signin">
           Sign In 
         </Navbar.Link>
-        <Navbar.Link className="text-lg" href="/signup">
+        <Navbar.Link className={getNavLinkClass("/signup")} href="/signup">
           Sign Up
         </Navbar.Link>
         </Navbar.Collapse>
@@ -96,6 +116,13 @@ function Header() {
           Quiz
         </Navbar.Link>
         </>
+        )}
+        {token["mytoken"] && role === "teacher-m" && (
+          <>
+          <Navbar.Link href="/admin/enrollstudents" className={getNavLinkClass("/admin/enrollstudents")}>
+          Dashboard
+        </Navbar.Link>
+          </>
         )}
         <Navbar.Link href="/leaderboard" className={getNavLinkClass("/leaderboard")}>
           Leaderboard
