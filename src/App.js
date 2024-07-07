@@ -78,13 +78,13 @@ function App() {
 
 
           
-					<Route path="/quiz-stepper" element={<QuizStepper />} />
-					<Route path="/quiz" element={<Quiz />} />
+
+					<Route path="/quiz" element={<QuizStepper />} />
 					<Route path="/admin/*" element={<Adminpanel />} />
 
 
-					<Route path="/update-quiz/:id" element={<UpdateQuestion />} />
-
+					
+          <Route path="/take-quiz" element={<Quiz />} />
 					<Route path="/quiz-result" element={<QuizResult />} />
 
           

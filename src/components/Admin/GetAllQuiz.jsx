@@ -3,7 +3,7 @@ import { deleteQuestion, getAllQuestions } from "../Admin/QuizService"
 
 import { Link } from "react-router-dom"
 import {FaPlus} from "react-icons/fa"
-
+import { useCookies } from "react-cookie";
 const GetAllQuiz = () => {
 	const [questions, setQuestions] = useState([
 		{ id: "", question: "", correctAnswers: "", choices: [] }
@@ -11,14 +11,14 @@ const GetAllQuiz = () => {
 	const [isLoading, setIsLoading] = useState(true)
 	const [isQuestionDeleted, setIsQuestionDeleted] = useState(false)
 	const [deleteSuccess, setDeleteSuccess] = useState("")
-
+	const [token, setToken, removeToken] = useCookies(["mytoken"]);
 	useEffect(() => {
 		fetchQuestions()
 	}, [])
 
 	const fetchQuestions = async () => {
 		try {
-			const data = await getAllQuestions()
+			const data = await getAllQuestions(token["mytoken"])
 			setQuestions(data)
 			setIsLoading(false)
 		} catch (error) {
@@ -28,7 +28,7 @@ const GetAllQuiz = () => {
 
 	const handleDeleteQuestion = async (id) => {
 		try {
-			await deleteQuestion(id)
+			await deleteQuestion(id,token["mytoken"])
 			setQuestions(questions.filter((question) => question.id !== id))
 			setIsQuestionDeleted(true)
 			setDeleteSuccess("Question deleted successfully.")
@@ -51,7 +51,7 @@ const GetAllQuiz = () => {
 					<h4>All Quiz Questions</h4>
 				</div>
 				<div >
-					<Link to={"/AddQuestion"} className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-500 focus:ring-blue-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
+					<Link to={"/admin/AddQuestion"} className="w-full px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-500 focus:ring-blue-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
 						 Add Question
 					</Link>
 				</div>
@@ -73,7 +73,7 @@ const GetAllQuiz = () => {
 					</ul>
 					<p className="text-success">Correct Answer: {question.correctAnswers}</p>
 					<div className="mb-4 btn-group">
-						<Link to={`/update-quiz/${question.id}`}>
+						<Link to={`/admin/update-quiz/${question.id}`}>
 							<button className="mr-2 btn btn-sm btn-outline-warning">Edit Question</button>
 						</Link>
 						<button

@@ -8,18 +8,33 @@ function Students() {
 
   const [token, setToken, removeToken] = useCookies(["mytoken"]);
   const [students, setStudents] = useState([]);
+  const [status, setStatus] = useState();
+
   useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const fetchStudents = () => {
     APIService.GetStudents(token["mytoken"])
-  .then((resp) => {
-    console.log(resp)
-    setStudents(resp)
+      .then((resp) => {
+        console.log(resp);
+        setStudents(resp);
+      })
+      .catch((error) => removeToken(["mytoken"]));
+  };
 
-  })
-  .catch((error) => 
 
-    removeToken(["mytoken"])
-);
-}, []);
+const handleActiveClick = (email) => {
+  const status = "accept";
+  APIService.updateStatus(token["mytoken"], {email, status})
+    .then((response) => {
+      console.log("Status updated successfully", response);
+      fetchStudents();
+    })
+    .catch((error) => {
+      console.error("Error updating status", error);
+    });
+};
 
   return (
     <div class="container  px-1 mx-auto sm:px-1">
@@ -130,7 +145,7 @@ function Students() {
 
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
                     <div className="flex flex-wrap gap-2">
-                      <Button color="blue">Active</Button>
+                      <Button color="blue" onClick={() => handleActiveClick(student.email)}>Accept</Button>
                     </div>
                   </td>
                 </tr>

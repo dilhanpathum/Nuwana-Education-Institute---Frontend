@@ -1,8 +1,26 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Image from "../../assets/dashboard/person1.png"
 import Content from "./Content";
-
+import { useCookies } from "react-cookie";
+import APIService from "../Api/APIService";
 function EnrollStudents() {
+
+  const [token, setToken, removeToken] = useCookies(["mytoken"]);
+  const [students, setStudents] = useState([]);
+  const [status, setStatus] = useState();
+
+  useEffect(() => {
+    APIService.GetEnrollStudents(token["mytoken"])
+  .then((resp) => {
+    console.log(resp)
+    setStudents(resp)
+
+  })
+  .catch((error) => 
+
+    removeToken(["mytoken"])
+);
+}, []);
   return (
     <>
 
@@ -71,9 +89,10 @@ function EnrollStudents() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+              {students.map((student) => (
+                <tr  key={student.id}>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">1</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.id}</p>
                   </td>
 
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
@@ -90,24 +109,24 @@ function EnrollStudents() {
                     </div>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Dilhan</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.firstname}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Pathum</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.lastname}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
                     <p class="text-gray-900 whitespace-no-wrap">
-                      dilhan@gmail.com
+                    {student.email}
                     </p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Male</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.gender}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Maths</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.subject}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">10</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.grade}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
                     <span class="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900">
@@ -121,6 +140,7 @@ function EnrollStudents() {
 
                  
                 </tr>
+                 ))}
               </tbody>
             </table>
           </div>

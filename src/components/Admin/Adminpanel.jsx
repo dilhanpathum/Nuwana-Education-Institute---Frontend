@@ -10,6 +10,7 @@ import EnrollStudents from './EnrollStudents';
 import Students from './Students';
 import { Routes, Route, Outlet } from "react-router-dom";
 import QrScan from './QrScan'
+import UpdateQuestion from '../Question/UpdateQuestion'
 
 
 
@@ -22,6 +23,7 @@ export default function Adminpanel() {
         <div className='dashboard--content'>
           
           <Routes>
+          <Route path="update-quiz/:id" element={<UpdateQuestion />} />
         <Route path="enrollstudents" element={<EnrollStudents/>} />
         <Route path="students" element={<Students/>} />
         <Route path="AddQuestion" element={<AddQuestion/>}/>

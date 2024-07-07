@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import "../../styles/quiz.css";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { getQuestionById, updateQuestion } from "../QuizOptions/QuizService"
-
+import { useCookies } from "react-cookie";
 
 const UpdateQuestion = () => {
 	const { id } = useParams()
@@ -11,14 +11,14 @@ const UpdateQuestion = () => {
 	const [choices, setChoices] = useState([""])
 	const [correctAnswers, setCorrectAnswers] = useState("")
 	const [isLoading, setIsLoading] = useState(true)
-
+	const [token, setToken, removeToken] = useCookies(["mytoken"]);
 	useEffect(() => {
 		fetchQuestion()
 	}, [])
 
 	const fetchQuestion = async () => {
 		try {
-			const questionToUpdate = await getQuestionById(id)
+			const questionToUpdate = await getQuestionById(id,token["mytoken"])
 			if (questionToUpdate) {
 				setQuestion(questionToUpdate.question)
 				setChoices(questionToUpdate.choices)
@@ -55,8 +55,8 @@ const UpdateQuestion = () => {
 					.split(",")
 					.map((answer) => answer.trim())
 			}
-			await updateQuestion(id, updatedQuestion)
-			navigate("/all-quizzes")
+			await updateQuestion(id, updatedQuestion,token["mytoken"])
+			navigate("/admin/GetAllQuiz")
 		} catch (error) {
 			console.error(error)
 		}
@@ -108,7 +108,7 @@ const UpdateQuestion = () => {
 						<button type="submit" className="btn btn-sm btn-outline-warning">
 							Update question
 						</button>
-						<Link to={"/all-quizzes"} className="btn btn-outline-primary ml-2">
+						<Link to={"/admin/GetAllQuiz"} className="btn btn-outline-primary ml-2">
 							Back to all questions
 						</Link>
 					</div>
