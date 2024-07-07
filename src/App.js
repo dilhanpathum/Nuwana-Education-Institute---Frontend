@@ -41,6 +41,7 @@ import SubjectGradeSelection from './components/Enroll/SubjectGradeSelection';
 
 import Adminpanel from './components/Admin/Adminpanel';
 import Content from './components/Admin/Content';
+import Admin from './components/Staff/Admin';
 
 
 
@@ -58,7 +59,7 @@ function App() {
           <Route path="/SignIn" element={<Login/>}/>
           <Route path="/SignUp" element={<Registation/>}/>
           <Route path='/Profile' element={<Profile/>}/>
-          <Route path='/Profile2' element={<Profile2/>}/>
+          <Route path='/attendence/:id' element={<Profile2/>}/>
           <Route path="/home" element={<Home />} />
 
           <Route path='/Test' element={<Test/>}/>
@@ -81,7 +82,7 @@ function App() {
 
 					<Route path="/quiz" element={<QuizStepper />} />
 					<Route path="/admin/*" element={<Adminpanel />} />
-
+          <Route path="/staff/*" element={<Admin />} />
 
 					
           <Route path="/take-quiz" element={<Quiz />} />

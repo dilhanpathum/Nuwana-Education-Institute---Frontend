@@ -8,7 +8,7 @@ function Footer() {
       <img src={Logo} className="h-10 mr-3 sm:h-9" alt="nuwana Logo" />
           Nuwana Higher Education  
       </a>
-      <p class="my-6 text-gray-500 dark:text-gray-400">Open-source library of over 400+ web components and interactive elements built for better web.</p>
+      <p class="my-6 text-gray-500 dark:text-gray-400">Fostering Excellence, Inspiring Innovation, and Transforming Education for a Brighter Tomorrow.</p>
       <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
           <li>
               <a href="/" class="mr-4 hover:underline md:mr-6 ">Home</a>

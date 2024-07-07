@@ -37,6 +37,17 @@ export default class APIService {
      body:JSON.stringify(body)
     }).then(resp => resp.json())
   }
+  static GetAttendennce(token,body){
+
+    return fetch(baseUrl+'attendence', {
+     'method' : 'POST',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+     body:JSON.stringify(body)
+    }).then(resp => resp.json())
+  }
 
   static Enroll(token,body){
 
@@ -83,6 +94,40 @@ export default class APIService {
         'Content-Type' : 'application/json',
         'Authorization' : `Bearer ${token}`
      },
+    }).then(resp => resp.json())
+  }
+
+  static GetAllTeachers(token){
+
+    return fetch(baseUrl+'teachers', {
+     'method' : 'GET',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+    }).then(resp => resp.json())
+  }
+
+  static GetStudents(token){
+
+    return fetch(baseUrl+'allClassStudents', {
+     'method' : 'GET',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+    }).then(resp => resp.json())
+  }
+
+  static updateUser(token,body){
+
+    return fetch(baseUrl+'edit', {
+     'method' : 'PUT',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+     body:JSON.stringify(body)
     }).then(resp => resp.json())
   }
 }
