@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   MDBCol,
   MDBContainer,
@@ -21,14 +21,62 @@ import Footer from "../Footer/Footer";
 import ReactApexChart from "react-apexcharts";
 import '../../styles/profilepic.css'
 import QRCode from "qrcode.react";
+import profilePic from '../../assets/profile/p3.jpg'
+import APIService from "../Api/APIService";
+import { jwtDecode } from "jwt-decode";
+import { useCookies } from "react-cookie";
+import toast from "react-hot-toast";
 
 export default function Profile() {
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role,setRole] = useState("");
+  const [contact,setContact] = useState("");
+  const [token, setToken, removeToken] = useCookies(["mytoken"]);
+  const [url,setUrl] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  useEffect(() => {
+    if (token["mytoken"] != null) {
+      const emailToken = (jwtDecode(token["mytoken"]).sub);
+
+
+      APIService.GetUserDetails(token["mytoken"],{email: emailToken})
+        .then((resp) => {
+          console.log(resp)
+          setFirstName(resp.firstname)
+          setLastName(resp.lastname)
+          setEmail(resp.email)
+          setRole(resp.role)
+          setContact(resp.contact)
+          setUrl(resp.email)
+        })
+        .catch((error) => 
+
+          removeToken(["mytoken"])
+      );
+    }
+  }, []);
   var loadFile = function (event) {
     var image = document.getElementById("output");
     image.src = URL.createObjectURL(event.target.files[0]);
   };
 
-  const url = "http://localhost:3000/profile";
+  const handleSave = () => {
+    const emailToken = (jwtDecode(token["mytoken"]).sub);
+    const updatedDetails = { firstname: firstName, lastname: lastName, email: emailToken, contact: contact };
+
+    APIService.updateUser(token["mytoken"], updatedDetails)
+      .then((resp) => {
+        console.log("User details updated:", resp);
+        toast.success("Profile Updated!")
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        console.error("Failed to update user details:", error);
+      });
+  };
 
   const downloadQR = () => {
     const canvas = document.getElementById("myqr");
@@ -104,7 +152,7 @@ export default function Profile() {
     <>
       <Header />
       <section style={{ backgroundColor: "#eee" }}>
-        <MDBContainer className="py-5">
+        <MDBContainer className="py-2">
           <MDBRow>
             <MDBCol lg="4">
               <MDBCard className="mb-4">
@@ -114,20 +162,21 @@ export default function Profile() {
                       <span class="glyphicon glyphicon-camera"></span>
                       <span>Change Image</span>
                     </label>
-                    <input id="file" type="file" name="propic" accept=".png, .jpg, .jpeg" onchange={loadFile}/>
+                    <input id="file" type="file" name="propic" accept=".png, .jpg, .jpeg" onChange={loadFile} />
                     <img
-                      src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
+                      src={profilePic}
                       id="output"
                       width="200"
                     />
                   </div>
-                  <p className="mb-1 text-muted">Full Stack Developer</p>
-                  <p className="mb-4 text-muted">Bay Area, San Francisco, CA</p>
+                  <p className="mb-1 text-muted">Student</p>
+
                   <div className="mb-2 d-flex justify-content-center">
-                    <MDBBtn>Follow</MDBBtn>
-                    <MDBBtn outline className="ms-1">
-                      Message
-                    </MDBBtn>
+                    {isEditing ? (
+                      <MDBBtn onClick={handleSave}>Save</MDBBtn>
+                    ) : (
+                      <MDBBtn onClick={() => setIsEditing(true)}>Edit</MDBBtn>
+                    )}
                   </div>
                 </MDBCardBody>
               </MDBCard>
@@ -159,12 +208,41 @@ export default function Profile() {
                 <MDBCardBody>
                   <MDBRow>
                     <MDBCol sm="3">
-                      <MDBCardText>Full Name</MDBCardText>
+                      <MDBCardText>First Name</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        Johnatan Smith
-                      </MDBCardText>
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {firstName}
+                        </MDBCardText>
+                      )}
+                    </MDBCol>
+                  </MDBRow>
+                  <hr />
+                  <MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>Last Name</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {lastName}
+                        </MDBCardText>
+                      )}
                     </MDBCol>
                   </MDBRow>
                   <hr />
@@ -173,9 +251,18 @@ export default function Profile() {
                       <MDBCardText>Email</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        example@example.com
-                      </MDBCardText>
+                      {isEditing ? (
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {email}
+                        </MDBCardText>
+                      )}
                     </MDBCol>
                   </MDBRow>
                   <hr />
@@ -184,119 +271,25 @@ export default function Profile() {
                       <MDBCardText>Phone</MDBCardText>
                     </MDBCol>
                     <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        (097) 234-5678
-                      </MDBCardText>
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          value={contact}
+                          onChange={(e) => setContact(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {contact}
+                        </MDBCardText>
+                      )}
                     </MDBCol>
                   </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Mobile</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        (098) 765-4321
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Address</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        Bay Area, San Francisco, CA
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
+
                 </MDBCardBody>
               </MDBCard>
 
               <MDBRow>
-                <MDBCol md="6">
-                  <MDBCard className="mb-4 mb-md-0">
-                    <MDBCardBody>
-                      <MDBCardText className="mb-4">
-                        <span className="text-primary font-italic me-1">
-                          assigment
-                        </span>{" "}
-                        Project Status
-                      </MDBCardText>
-                      <MDBCardText
-                        className="mb-1"
-                        style={{ fontSize: ".77rem" }}
-                      >
-                        Web Design
-                      </MDBCardText>
-                      <MDBProgress className="rounded">
-                        <MDBProgressBar
-                          width={80}
-                          valuemin={0}
-                          valuemax={100}
-                        />
-                      </MDBProgress>
-
-                      <MDBCardText
-                        className="mt-4 mb-1"
-                        style={{ fontSize: ".77rem" }}
-                      >
-                        Website Markup
-                      </MDBCardText>
-                      <MDBProgress className="rounded">
-                        <MDBProgressBar
-                          width={72}
-                          valuemin={0}
-                          valuemax={100}
-                        />
-                      </MDBProgress>
-
-                      <MDBCardText
-                        className="mt-4 mb-1"
-                        style={{ fontSize: ".77rem" }}
-                      >
-                        One Page
-                      </MDBCardText>
-                      <MDBProgress className="rounded">
-                        <MDBProgressBar
-                          width={89}
-                          valuemin={0}
-                          valuemax={100}
-                        />
-                      </MDBProgress>
-
-                      <MDBCardText
-                        className="mt-4 mb-1"
-                        style={{ fontSize: ".77rem" }}
-                      >
-                        Mobile Template
-                      </MDBCardText>
-                      <MDBProgress className="rounded">
-                        <MDBProgressBar
-                          width={55}
-                          valuemin={0}
-                          valuemax={100}
-                        />
-                      </MDBProgress>
-
-                      <MDBCardText
-                        className="mt-4 mb-1"
-                        style={{ fontSize: ".77rem" }}
-                      >
-                        Backend API
-                      </MDBCardText>
-                      <MDBProgress className="rounded">
-                        <MDBProgressBar
-                          width={66}
-                          valuemin={0}
-                          valuemax={100}
-                        />
-                      </MDBProgress>
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-
                 <MDBCol md="6">
                   <MDBCard className="mb-4 mb-md-0">
                     <div>

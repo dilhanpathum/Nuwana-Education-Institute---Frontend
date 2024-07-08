@@ -31,6 +31,8 @@
 
 .card-body {
     padding: 20px;
+    background: #fbfbfb;
+    border: 1px solid black;
 }
 
 .form-label {

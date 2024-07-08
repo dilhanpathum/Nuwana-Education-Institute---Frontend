@@ -7,13 +7,13 @@ import { BiBookAlt,
     BiTask,
     BiHelpCircle, 
 } from 'react-icons/bi';
-import '../styles/sidebar.css'
+import '../../styles/sidebar.css'
 
 import  { useState, useEffect } from 'react';
 
 
 
-const Sidebar = () => {
+const Sidebar1 = () => {
 
     const [activeItem, setActiveItem] = useState('');
 
@@ -23,51 +23,45 @@ const Sidebar = () => {
         
         // Update activeItem based on the current path
         switch (currentPath) {
-            case '/Test4':
+            case '/staff/teachers':
                 setActiveItem('Assignment');
                 break;
-                case '/Test5':
+                case '/staff/students':
                 setActiveItem('Dashboard');
                 break;
+                case '/staff/RegistrationTeacher':
+                setActiveItem('QuizManage');
+                break;
+                
         }
     }, []);
 
     return (
         <div className='menu'>
-            <div className='logo'>
+            {/* <div className='logo'>
                 <BiBookAlt className='logo-icon'/>
                 <h2>Nuwana</h2>
-            </div>
+            </div> */}
 
             <div className='menu--list'>
-                <a href='http://localhost:3000/Test5' className={activeItem === 'Dashboard' ? 'item active' : 'item'}>
+                <a href='http://localhost:3000/staff/students' className={activeItem === 'Dashboard' ? 'item active' : 'item'}>
                     <BiHome className='logo-icon'/>
-                    Dashboard
+                    Students
                 </a>
-                <a href='http://localhost:3000/Test4' className={activeItem === 'Assignment' ? 'item active' : 'item'}>
+                <a href='http://localhost:3000/staff/teachers' className={activeItem === 'Assignment' ? 'item active' : 'item'}>
                     <BiTask className='icon'/>
-                    Assignment
+                    Teachers
                 </a>
-                <a href='http://localhost:3000/AddQuestion' className='item'>
+                <a href='http://localhost:3000/staff/RegistrationTeacher' className={activeItem === 'QuizManage' ? 'item active' : 'item'}>
                     <BiSolidReport className='icon'/>
-                   Quiz Manage
+                   Add Teachers
                 </a>
-                <a href='#' className='item'>
-                    <BiStats className='icon'/>
-                   Stats
-                </a>
-                <a href='#' className='item'>
-                    <BiMessage className='icon'/>
-                    Message
-                </a>
-                <a href='#' className='item'>
-                    <BiHelpCircle className='icon'/>
-                    Help
-                </a>
+               
+                
 
             </div>
         </div>
     );
 };
 
-export default Sidebar
+export default Sidebar1

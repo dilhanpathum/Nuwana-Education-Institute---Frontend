@@ -8,31 +8,29 @@ function Footer() {
       <img src={Logo} className="h-10 mr-3 sm:h-9" alt="nuwana Logo" />
           Nuwana Higher Education  
       </a>
-      <p class="my-6 text-gray-500 dark:text-gray-400">Open-source library of over 400+ web components and interactive elements built for better web.</p>
+      <p class="my-6 text-gray-500 dark:text-gray-400">Fostering Excellence, Inspiring Innovation, and Transforming Education for a Brighter Tomorrow.</p>
       <ul class="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
+              <a href="/" class="mr-4 hover:underline md:mr-6 ">Home</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">Premium</a>
+              <a href="/about" class="mr-4 hover:underline md:mr-6">About</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6 ">Campaigns</a>
+              <a href="/gallery" class="mr-4 hover:underline md:mr-6 ">Gallery</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">Blog</a>
+              <a href="/leaderboard" class="mr-4 hover:underline md:mr-6">Leaderboard</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">Affiliate Program</a>
+              <a href="/virtual" class="mr-4 hover:underline md:mr-6">Virtual tour</a>
           </li>
           <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">FAQs</a>
+              <a href="/contact" class="mr-4 hover:underline md:mr-6">Contact</a>
           </li>
-          <li>
-              <a href="#" class="mr-4 hover:underline md:mr-6">Contact</a>
-          </li>
+
       </ul>
-      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2021-2022 <a href="#" class="hover:underline">Flowbite™</a>. All Rights Reserved.</span>
+      <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="/" class="hover:underline">&nbsp; Nuwana Higher Education Institute</a>. All Rights Reserved.</span>
   </div>
 </footer>
   )

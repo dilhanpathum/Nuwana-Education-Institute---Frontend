@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import "../../styles/addQuestion.css"
 import { Link } from "react-router-dom"
-import { createQuestion, getSubjects } from "../../components/Test/QuizService"
-
+import { createQuestion, getSubjects } from "../Admin/QuizService"
+import { useCookies } from "react-cookie";
 
 const AddQuestion = () => {
 	const [question, setQuestionText] = useState("")
@@ -12,14 +12,14 @@ const AddQuestion = () => {
 	const [subject, setSubject] = useState("")
 	const [newSubject, setNewSubject] = useState("")
 	const [subjectOptions, setSubjectOptions] = useState([""])
-
+	const [token, setToken, removeToken] = useCookies(["mytoken"]);
 	useEffect(() => {
 		fetchSubjects()
 	}, [])
 
 	const fetchSubjects = async () => {
 		try {
-			const subjectsData = await getSubjects()
+			const subjectsData = await getSubjects(token["mytoken"])
 			setSubjectOptions(subjectsData)
 		} catch (error) {
 			console.error(error)
@@ -56,21 +56,23 @@ const AddQuestion = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
+		console.log(correctAnswers)
 		try {
 			const result = {
 				question,
 				questionType,
 				choices,
-				correctAnswers: correctAnswers.map((answer) => {
-					const choiceLetter = answer.charAt(0).toUpperCase()
-					const choiceIndex = choiceLetter.charCodeAt(0) - 65
-					return choiceIndex >= 0 && choiceIndex < choices.length ? choiceLetter : null
-				}),
+				correctAnswers: correctAnswers,
+				// correctAnswers: correctAnswers.map((answer) => {
+				// 	const choiceLetter = answer.charAt(0).toUpperCase();
+				// 	const choiceIndex = choiceLetter.charCodeAt(0) - 65; 
+				// 	return choiceIndex >= 0 && choiceIndex < choices.length ? choiceLetter : null;
+				//   }),
 
 				subject
 			}
-
-			await createQuestion(result)
+			console.log(result)
+			await createQuestion(result,token["mytoken"])
 
 			setQuestionText("")
 			setQuestionType("single")
@@ -95,13 +97,13 @@ const AddQuestion = () => {
 
 <div className="flex justify-end">
 				
-				<Link to={"/GetAllQuiz"} className=" right-0 py-2 px-4 bg-blue-500 hover:bg-blue-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+				<Link to={"/admin/GetAllQuiz"} className="right-0 px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-blue-500 rounded-lg shadow-md hover:bg-blue-500 focus:ring-indigo-500 focus:ring-offset-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
 					Manage existing Quizzes
 				</Link>
 			</div>
 
 			<div className="row justify-content-center">
-				<div className="col-md-8  mt-5">
+				<div className="mt-5 col-md-8">
 					<div className="card">
 						<div className="card-header">
 							<h5 className="card-title">Add New Questions</h5>
@@ -116,11 +118,11 @@ const AddQuestion = () => {
 										id="subject"
 										value={subject}
 										onChange={(e) => setSubject(e.target.value)}
-										className="rounded-lg border-gray-400 flex-1 appearance-none border w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+										className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-400 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
 										<option value="">Select subject</option>
 										<option value={"New"}>Add New</option>
 										
-											<option key="1" value="Maths">
+											<option selected key="1" value="Maths">
 												Maths
 											</option>
 										
@@ -142,7 +144,7 @@ const AddQuestion = () => {
 										<button
 											type="button"
 											onClick={handleAddSubject}
-											className="btn1 btn-outline-primary mt-2">
+											className="mt-2 btn1 btn-outline-primary">
 											Add Subject
 										</button>
 									</div>
@@ -165,7 +167,7 @@ const AddQuestion = () => {
 										id="question-type"
 										value={questionType}
 										onChange={(event) => setQuestionType(event.target.value)}
-										className="rounded-lg border-gray-400 flex-1 appearance-none border w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+										className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-400 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
 										<option className="text-blue-800" value="single">Single Answer</option>
 										<option value="multiple">Multiple Answer</option>
 									</select>
@@ -175,7 +177,7 @@ const AddQuestion = () => {
 										Choices
 									</label>
 									{choices.map((choice, index) => (
-										<div key={index} className="input-group mb-3">
+										<div key={index} className="mb-3 input-group">
 											<input
 												type="text"
 												value={choice}
@@ -186,7 +188,7 @@ const AddQuestion = () => {
 											<button
 												type="button"
 												onClick={() => handleRemoveChoice(index)}
-												className="px-6 py-2  transition ease-in duration-200   hover:bg-red-600  hover:text-white border-2 border-red-600 focus:outline-none text-red-600 rounded-lg">
+												className="px-6 py-2 text-red-600 transition duration-200 ease-in border-2 border-red-600 rounded-lg hover:bg-red-600 hover:text-white focus:outline-none">
 												Remove
 											</button>
 										</div>
@@ -194,7 +196,7 @@ const AddQuestion = () => {
 									<button
 										type="button"
 										onClick={handleAddChoice}
-										className="px-6 py-2  transition ease-in duration-200  rounded-full hover:bg-blue-500 hover:text-white border-2 border-blue-500 focus:outline-none text-blue-500">
+										className="px-6 py-2 text-blue-500 transition duration-200 ease-in border-2 border-blue-500 rounded-full hover:bg-blue-500 hover:text-white focus:outline-none">
 										Add Choice
 									</button>
 								</div>
@@ -205,7 +207,7 @@ const AddQuestion = () => {
 										</label>
 										<input
 											type="text"
-											className="rounded-lg border-gray-400 flex-1 appearance-none border w-full py-2 px-4 bg-white text-black placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+											className="flex-1 w-full px-4 py-2 text-base text-black placeholder-gray-400 bg-white border border-gray-400 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 											id="answer"
 											value={correctAnswers[0]}
 											onChange={(e) => handleCorrectAnswerChange(0, e.target.value)}
@@ -218,17 +220,17 @@ const AddQuestion = () => {
 											Correct Answer(s)
 										</label>
 										{correctAnswers.map((answer, index) => (
-											<div key={index} className="d-flex mb-2">
+											<div key={index} className="mb-2 d-flex">
 												<input
 													type="text"
-													className="rounded-lg border-gray-400 flex-1 appearance-none border w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+													className="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-400 rounded-lg shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
 													value={answer}
 													onChange={(e) => handleCorrectAnswerChange(index, e.target.value)}
 												/>
 												{index > 0 && (
 													<button
 														type="button"
-														className="px-6 py-2  transition ease-in duration-200   hover:bg-red-600  hover:text-white border-2 border-red-600 focus:outline-none text-red-600 rounded-lg"
+														className="px-6 py-2 text-red-600 transition duration-200 ease-in border-2 border-red-600 rounded-lg hover:bg-red-600 hover:text-white focus:outline-none"
 														onClick={() => handleRemoveCorrectAnswer(index)}>
 														Remove
 													</button>
@@ -237,7 +239,7 @@ const AddQuestion = () => {
 										))}
 										<button
 											type="button"
-											className="px-6 py-2  transition ease-in duration-200  rounded-full hover:bg-blue-500 hover:text-white border-2 border-blue-500 focus:outline-none text-blue-500"
+											className="px-6 py-2 text-blue-500 transition duration-200 ease-in border-2 border-blue-500 rounded-full hover:bg-blue-500 hover:text-white focus:outline-none"
 											onClick={handleAddCorrectAnswer}>
 											Add Correct Answer
 										</button>
@@ -247,11 +249,11 @@ const AddQuestion = () => {
 								{!correctAnswers.length && <p>Please enter at least one correct answer.</p>}
 
 								<div className="btn-group">
-									<button type="submit" className="px-6 py-2  transition ease-in duration-200   hover:bg-green-500 hover:text-white border-2 border-green-500 focus:outline-none text-green-500">
+									<button type="submit" className="px-6 py-2 text-green-500 transition duration-200 ease-in border-2 border-green-500 hover:bg-green-500 hover:text-white focus:outline-none">
 										Save Question
 									</button>
-									<Link to={"/all-quizzes"} >
-										<button className="px-6 py-2  transition ease-in duration-200   hover:bg-blue-500 hover:text-white border-2 border-blue-500 focus:outline-none text-blue-500">Back to existing questions</button>
+									<Link to={"/admin/GetAllQuiz"} >
+										<button className="px-6 py-2 text-blue-500 transition duration-200 ease-in border-2 border-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none">Back to existing questions</button>
 									</Link>
 								</div>
 							</form>

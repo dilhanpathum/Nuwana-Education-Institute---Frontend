@@ -13,18 +13,13 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import CheckToken from "../Api/CheckToken";
 
 
-function Registation() {
+function RegistationTeacher() {
   const [response, setResponse] = useState([]);
   const [username, setUsername] = useState("");
   const [gender, setGender] = useState("");
   const [fullname, setFullname] = useState("");
   let navigate = useNavigate();
-  if(response.token!=null){
-   
-    toast.success("Registraion Successfully!")
-    navigate("/signin")
-    
-  }
+  
   const [error, setError] = useState("");
   const {
     register,
@@ -43,6 +38,7 @@ function Registation() {
       .then((resp) => {
         if (resp.token) {
           setResponse(resp);
+          toast.success("Registraion Successfully!")
         } else {
           console.log(resp);
           setError(resp.message);
@@ -90,28 +86,15 @@ function Registation() {
   const email = watch("email");
   return (
     <>
-      <Header />
-      <CheckToken/>
-      <section class="bg-gray-50 background dark:bg-gray-900 ">
-        <div class=" flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 ">
-          <a
-            href="#"
-            class="flex items-center mb-4 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            <img class="w-60 h-41 mr-2" src={Logo} alt="logo" />
-          </a>
-          <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 lg:mb-20 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create and account
-              </h1>
+      <section class="bg-gray-50  dark:bg-gray-900 ">
+      <div class=" flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 ">
               <form onSubmit={(e) => e.preventDefault()}>
                 <div>
                   <input
                     type="hidden"
                     name="role"
                     id="role"
-                    value="student"
+                    value="teacher"
                     {...register("role")}
                   />
                 </div>
@@ -319,25 +302,13 @@ function Registation() {
                     Create an account
                   </button>
                 </div>
-                <div>
-                  <p class="text-sm font-light mt-4 text-gray-500 dark:text-gray-400">
-                    Already have an account?{" "}
-                    <a
-                      href="/signin"
-                      class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                    >
-                      Login here
-                    </a>
-                  </p>
-                </div>
+                
               </form>
-            </div>
-          </div>
-        </div>
-      </section>
-      <Footer />
+            
+</div>
+</section>
     </>
   );
 }
 
-export default Registation;
+export default RegistationTeacher;

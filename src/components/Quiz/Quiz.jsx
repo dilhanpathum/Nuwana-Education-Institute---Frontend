@@ -3,7 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { fetchQuizForUser } from "../QuizOptions/QuizService"
 import AnswerOptions from "../QuizOptions/AnswerOption"
 import "../../styles/quiz.css";
-
+import { useCookies } from "react-cookie";
+import Header from "../Navbar/Header";
+import Footer from "../Footer/Footer";
 const Quiz = () => {
 	const [quizQuestions, setQuizQuestions] = useState([
 		{ id: "", correctAnswers: "", question: "", questionType: "" }
@@ -14,14 +16,14 @@ const Quiz = () => {
 	const location = useLocation()
 	const navigate = useNavigate()
 	const { selectedSubject, selectedNumQuestions } = location.state
-
+	const [token, setToken, removeToken] = useCookies(["mytoken"]);
 	useEffect(() => {
 		fetchQuizData()
 	}, [])
 
 	const fetchQuizData = async () => {
 		if (selectedNumQuestions && selectedSubject) {
-			const questions = await fetchQuizForUser(selectedNumQuestions, selectedSubject)
+			const questions = await fetchQuizForUser(selectedNumQuestions, selectedSubject,token["mytoken"])
 			setQuizQuestions(questions)
 		}
 	}
@@ -126,6 +128,8 @@ const handleSubmit = () => {
 	}
 
 	return (
+		<><Header/>
+		
 		<div className="quiz-container">
 		<div className="p-5">
 			<h3 className="text-info quiz">
@@ -166,6 +170,8 @@ const handleSubmit = () => {
 			</div>
 		</div>
 		</div>
+		<Footer/>
+		</>
 	)
 }
 

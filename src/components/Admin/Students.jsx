@@ -1,7 +1,41 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import Image from "../../assets/dashboard/person1.png"
 import { Button } from "flowbite-react";
-function Test5() {
+import { useCookies } from "react-cookie";
+import APIService from "../Api/APIService";
+
+function Students() {
+
+  const [token, setToken, removeToken] = useCookies(["mytoken"]);
+  const [students, setStudents] = useState([]);
+  const [status, setStatus] = useState();
+
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const fetchStudents = () => {
+    APIService.GetStudents(token["mytoken"])
+      .then((resp) => {
+        console.log(resp);
+        setStudents(resp);
+      })
+      .catch((error) => removeToken(["mytoken"]));
+  };
+
+
+const handleActiveClick = (email) => {
+  const status = "accept";
+  APIService.updateStatus(token["mytoken"], {email, status})
+    .then((response) => {
+      console.log("Status updated successfully", response);
+      fetchStudents();
+    })
+    .catch((error) => {
+      console.error("Error updating status", error);
+    });
+};
+
   return (
     <div class="container  px-1 mx-auto sm:px-1">
       <div class="py-8">
@@ -68,9 +102,10 @@ function Test5() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+              {students.map((student) => (
+                <tr  key={student.id}>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">1</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.id}</p>
                   </td>
 
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
@@ -87,33 +122,34 @@ function Test5() {
                     </div>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Dilhan</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.firstname}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Pathum</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.lastname}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
                     <p class="text-gray-900 whitespace-no-wrap">
-                      dilhan@gmail.com
+                    {student.email}
                     </p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Male</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.gender}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Maths</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.subject}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">10</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.grade}</p>
                   </td>
                   
 
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
                     <div className="flex flex-wrap gap-2">
-                      <Button color="blue">Active</Button>
+                      <Button color="blue" onClick={() => handleActiveClick(student.email)}>Accept</Button>
                     </div>
                   </td>
                 </tr>
+              ))}
               </tbody>
             </table>
           </div>
@@ -123,4 +159,4 @@ function Test5() {
   );
 }
 
-export default Test5;
+export default Students;

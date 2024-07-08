@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
     MDBCol,
     MDBContainer,
@@ -24,15 +24,45 @@ import Footer from "../Footer/Footer";
 import ReactApexChart from "react-apexcharts";
 import "../../styles/profilepic.css";
 import QRCode from "qrcode.react";
+import { useCookies } from "react-cookie";
+import profilePic from '../../assets/profile/p3.jpg'
+import APIService from "../Api/APIService";
+import { useParams } from 'react-router-dom';
 
 export default function Profile2() {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [role,setRole] = useState("");
+    const [contact,setContact] = useState("");
+    const [token, setToken, removeToken] = useCookies(["mytoken"]);
+    const [url,setUrl] = useState("");
+    const [isEditing, setIsEditing] = useState(false);
+    const { id } = useParams();
     var loadFile = function (event) {
         var image = document.getElementById("output");
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 
     const label = { inputProps: { "aria-label": "Checkbox demo" } };
-    const url = "http://localhost:3000/profile";
+    useEffect(() => {
+    
+    
+          APIService.GetAttendennce(token["mytoken"],{id:id})
+            .then((resp) => {
+              console.log(resp)
+              setFirstName(resp.firstname)
+              setLastName(resp.lastname)
+              setEmail(resp.email)
+              setRole(resp.role)
+              setContact(resp.contact)
+              setUrl(resp.email)
+            })
+            .catch((error) => 
+                    console.error(error)
+          );
+        
+      }, []);
 
     const downloadQR = () => {
         const canvas = document.getElementById("myqr");
@@ -112,7 +142,7 @@ export default function Profile2() {
                 <div class="py-8">
                     <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
                         <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
-                            <h1 className="px-5 py-3">Attendance Mark : May</h1>
+                            <h1 className="px-5 py-3">Attendance Mark : July</h1>
                             <table class="min-w-full leading-normal m-0.5">
                                 <thead>
                                     <tr>
@@ -273,225 +303,158 @@ export default function Profile2() {
             </div>
 
             <section style={{ backgroundColor: "#eee" }}>
-                <MDBContainer className="py-5">
-                    <MDBRow>
-                        <MDBCol lg="4">
-                            <MDBCard className="mb-4">
-                                <MDBCardBody className="text-center">
-                                    <div class="profile-pic">
-                                        <label class="-label" for="file">
-                                            <span class="glyphicon glyphicon-camera"></span>
-                                            <span>Change Image</span>
-                                        </label>
-                                        <input
-                                            id="file"
-                                            type="file"
-                                            name="propic"
-                                            accept=".png, .jpg, .jpeg"
-                                            onchange={loadFile}
-                                        />
-                                        <img
-                                            src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
-                                            id="output"
-                                            width="200"
-                                        />
-                                    </div>
-                                    <p className="mb-1 text-muted">Full Stack Developer</p>
-                                    <p className="mb-4 text-muted">Bay Area, San Francisco, CA</p>
-                                    <div className="mb-2 d-flex justify-content-center">
-                                        <MDBBtn>Follow</MDBBtn>
-                                        <MDBBtn outline className="ms-1">
-                                            Message
-                                        </MDBBtn>
-                                    </div>
-                                </MDBCardBody>
-                            </MDBCard>
+        <MDBContainer className="py-2">
+          <MDBRow>
+            <MDBCol lg="4">
+              <MDBCard className="mb-4">
+                <MDBCardBody className="text-center">
+                  <div class="profile-pic">
+                    <label class="-label" for="file">
+                      <span class="glyphicon glyphicon-camera"></span>
+                      <span>Change Image</span>
+                    </label>
+                    <input id="file" type="file" name="propic" accept=".png, .jpg, .jpeg" onChange={loadFile} />
+                    <img
+                      src={profilePic}
+                      id="output"
+                      width="200"
+                    />
+                  </div>
+                  <p className="mb-1 text-muted">Student</p>
 
-                            <MDBCard className="mb-4 mb-lg-0">
-                                <MDBCardBody className="flex justify-center p-4">
-                                    <MDBListGroup flush className="rounded-3">
-                                        <div>
-                                            <div className="myqr">
-                                                <QRCode
-                                                    id="myqr"
-                                                    size={300}
-                                                    value={url}
-                                                    includeMargin={true}
-                                                    renderAs="canvas"
-                                                />
-                                            </div>
-                                            <br></br>
-                                            <div className="flex justify-center">
-                                                <button onClick={downloadQR}>Download QR Code</button>
-                                            </div>
-                                        </div>
-                                    </MDBListGroup>
-                                </MDBCardBody>
-                            </MDBCard>
-                        </MDBCol>
-                        <MDBCol lg="8">
-                            <MDBCard className="mb-4">
-                                <MDBCardBody>
-                                    <MDBRow>
-                                        <MDBCol sm="3">
-                                            <MDBCardText>Full Name</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="9">
-                                            <MDBCardText className="text-muted">
-                                                Johnatan Smith
-                                            </MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <hr />
-                                    <MDBRow>
-                                        <MDBCol sm="3">
-                                            <MDBCardText>Email</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="9">
-                                            <MDBCardText className="text-muted">
-                                                example@example.com
-                                            </MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <hr />
-                                    <MDBRow>
-                                        <MDBCol sm="3">
-                                            <MDBCardText>Phone</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="9">
-                                            <MDBCardText className="text-muted">
-                                                (097) 234-5678
-                                            </MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <hr />
-                                    <MDBRow>
-                                        <MDBCol sm="3">
-                                            <MDBCardText>Mobile</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="9">
-                                            <MDBCardText className="text-muted">
-                                                (098) 765-4321
-                                            </MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                    <hr />
-                                    <MDBRow>
-                                        <MDBCol sm="3">
-                                            <MDBCardText>Address</MDBCardText>
-                                        </MDBCol>
-                                        <MDBCol sm="9">
-                                            <MDBCardText className="text-muted">
-                                                Bay Area, San Francisco, CA
-                                            </MDBCardText>
-                                        </MDBCol>
-                                    </MDBRow>
-                                </MDBCardBody>
-                            </MDBCard>
+                  
+                </MDBCardBody>
+              </MDBCard>
 
-                            <MDBRow>
-                                <MDBCol md="6">
-                                    <MDBCard className="mb-4 mb-md-0">
-                                        <MDBCardBody>
-                                            <MDBCardText className="mb-4">
-                                                <span className="text-primary font-italic me-1">
-                                                    assigment
-                                                </span>{" "}
-                                                Project Status
-                                            </MDBCardText>
-                                            <MDBCardText
-                                                className="mb-1"
-                                                style={{ fontSize: ".77rem" }}
-                                            >
-                                                Web Design
-                                            </MDBCardText>
-                                            <MDBProgress className="rounded">
-                                                <MDBProgressBar
-                                                    width={80}
-                                                    valuemin={0}
-                                                    valuemax={100}
-                                                />
-                                            </MDBProgress>
+              <MDBCard className="mb-4 mb-lg-0">
+                <MDBCardBody className="flex justify-center p-4">
+                  <MDBListGroup flush className="rounded-3">
+                    <div>
+                      <div className="myqr">
+                        <QRCode
+                          id="myqr"
+                          size={300}
+                          value={url}
+                          includeMargin={true}
+                          renderAs="canvas"
+                        />
+                      </div>
+                      <br></br>
+                      <div className="flex justify-center">
+                        <button onClick={downloadQR}>Download QR Code</button>
+                      </div>
+                    </div>
+                  </MDBListGroup>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+            <MDBCol lg="8">
+              <MDBCard className="mb-4">
+                <MDBCardBody>
+                  <MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>First Name</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {firstName}
+                        </MDBCardText>
+                      )}
+                    </MDBCol>
+                  </MDBRow>
+                  <hr />
+                  <MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>Last Name</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {lastName}
+                        </MDBCardText>
+                      )}
+                    </MDBCol>
+                  </MDBRow>
+                  <hr />
+                  <MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>Email</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      {isEditing ? (
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {email}
+                        </MDBCardText>
+                      )}
+                    </MDBCol>
+                  </MDBRow>
+                  <hr />
+                  <MDBRow>
+                    <MDBCol sm="3">
+                      <MDBCardText>Phone</MDBCardText>
+                    </MDBCol>
+                    <MDBCol sm="9">
+                      {isEditing ? (
+                        <input
+                          type="text"
+                          value={contact}
+                          onChange={(e) => setContact(e.target.value)}
+                          className="form-control"
+                        />
+                      ) : (
+                        <MDBCardText className="text-muted">
+                          {contact}
+                        </MDBCardText>
+                      )}
+                    </MDBCol>
+                  </MDBRow>
 
-                                            <MDBCardText
-                                                className="mt-4 mb-1"
-                                                style={{ fontSize: ".77rem" }}
-                                            >
-                                                Website Markup
-                                            </MDBCardText>
-                                            <MDBProgress className="rounded">
-                                                <MDBProgressBar
-                                                    width={72}
-                                                    valuemin={0}
-                                                    valuemax={100}
-                                                />
-                                            </MDBProgress>
+                </MDBCardBody>
+              </MDBCard>
 
-                                            <MDBCardText
-                                                className="mt-4 mb-1"
-                                                style={{ fontSize: ".77rem" }}
-                                            >
-                                                One Page
-                                            </MDBCardText>
-                                            <MDBProgress className="rounded">
-                                                <MDBProgressBar
-                                                    width={89}
-                                                    valuemin={0}
-                                                    valuemax={100}
-                                                />
-                                            </MDBProgress>
-
-                                            <MDBCardText
-                                                className="mt-4 mb-1"
-                                                style={{ fontSize: ".77rem" }}
-                                            >
-                                                Mobile Template
-                                            </MDBCardText>
-                                            <MDBProgress className="rounded">
-                                                <MDBProgressBar
-                                                    width={55}
-                                                    valuemin={0}
-                                                    valuemax={100}
-                                                />
-                                            </MDBProgress>
-
-                                            <MDBCardText
-                                                className="mt-4 mb-1"
-                                                style={{ fontSize: ".77rem" }}
-                                            >
-                                                Backend API
-                                            </MDBCardText>
-                                            <MDBProgress className="rounded">
-                                                <MDBProgressBar
-                                                    width={66}
-                                                    valuemin={0}
-                                                    valuemax={100}
-                                                />
-                                            </MDBProgress>
-                                        </MDBCardBody>
-                                    </MDBCard>
-                                </MDBCol>
-
-                                <MDBCol md="6">
-                                    <MDBCard className="mb-4 mb-md-0">
-                                        <div>
-                                            <div id="chart">
-                                                <ReactApexChart
-                                                    options={state.options}
-                                                    series={state.series}
-                                                    type="line"
-                                                    height={350}
-                                                />
-                                            </div>
-                                            <div id="html-dist"></div>
-                                        </div>
-                                    </MDBCard>
-                                </MDBCol>
-                            </MDBRow>
-                        </MDBCol>
-                    </MDBRow>
-                </MDBContainer>
-            </section>
+              <MDBRow>
+                <MDBCol md="6">
+                  <MDBCard className="mb-4 mb-md-0">
+                    <div>
+                      <div id="chart">
+                        <ReactApexChart
+                          options={state.options}
+                          series={state.series}
+                          type="line"
+                          height={350}
+                        />
+                      </div>
+                      <div id="html-dist"></div>
+                    </div>
+                  </MDBCard>
+                </MDBCol>
+              </MDBRow>
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+      </section>
             <Footer />
         </>
     );

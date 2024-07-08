@@ -1,8 +1,31 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Image from "../../assets/dashboard/person1.png"
+import profile1 from "../../assets/teachers/t1.jpg";
+import profile2 from "../../assets/teachers/t2.jpg";
+import profile3 from "../../assets/teachers/t3.jpg";
+import { useCookies } from "react-cookie";
+import APIService from "../Api/APIService";
+function Teachers() {
 
-function Test4() {
+  const [token, setToken, removeToken] = useCookies(["mytoken"]);
+  const [students, setStudents] = useState([]);
+  const [status, setStatus] = useState();
+
+  useEffect(() => {
+    APIService.GetAllTeachers(token["mytoken"])
+  .then((resp) => {
+    console.log(resp)
+    setStudents(resp)
+
+  })
+  .catch((error) => 
+
+    removeToken(["mytoken"])
+);
+}, []);
   return (
+    <>
+
     <div class="container  px-1 mx-auto sm:px-1">
       <div class="py-8">
         <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
@@ -52,25 +75,15 @@ function Test4() {
                   >
                     Subject
                   </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
-                  >
-                    Grade
-                  </th>
-                  <th
-                    scope="col"
-                    class="px-3 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200"
-                  >
-                    status
-                  </th>
+                  
                   
                 </tr>
               </thead>
               <tbody>
-                <tr>
+              {students.map((student) => (
+                <tr  key={student.id}>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">1</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.id}</p>
                   </td>
 
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
@@ -79,7 +92,7 @@ function Test4() {
                         <a href="#" class="relative block">
                           <img
                             alt=""
-                            src={Image}
+                            src={require(`../../assets/teachers/t${student.id}.jpg`)}
                             class="mx-auto object-cover rounded-full h-10 w-10 "
                           />
                         </a>
@@ -87,44 +100,36 @@ function Test4() {
                     </div>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Dilhan</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.firstname}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Pathum</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.lastname}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
                     <p class="text-gray-900 whitespace-no-wrap">
-                      dilhan@gmail.com
+                    {student.email}
                     </p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Male</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.gender}</p>
                   </td>
                   <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">Maths</p>
+                    <p class="text-gray-900 whitespace-no-wrap">{student.subject}</p>
                   </td>
-                  <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <p class="text-gray-900 whitespace-no-wrap">10</p>
-                  </td>
-                  <td class="px-3 py-5 text-sm bg-white border-b border-gray-200">
-                    <span class="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900">
-                      <span
-                        aria-hidden="true"
-                        class="absolute inset-0 bg-green-200 rounded-full opacity-50"
-                      ></span>
-                      <span class="relative">Active</span>
-                    </span>
-                  </td>
+                  
+                  
 
                  
                 </tr>
+                 ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
 
-export default Test4;
+export default Teachers;
