@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import Image from "../../assets/dashboard/person1.png"
+import Image from "../../assets/profile/p4.png"
 import { Button } from "flowbite-react";
 import { useCookies } from "react-cookie";
 import APIService from "../Api/APIService";
@@ -15,7 +15,7 @@ function Students() {
   }, []);
 
   const fetchStudents = () => {
-    APIService.GetStudents(token["mytoken"])
+    APIService.Pending(token["mytoken"])
       .then((resp) => {
         console.log(resp);
         setStudents(resp);

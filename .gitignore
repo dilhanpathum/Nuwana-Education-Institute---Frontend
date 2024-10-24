@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+public/class.glb
+public/models/50.glb
+public/models/55.bin
+public/models/class.gltf
+public/textures/class.bin
+public/textures/class.gltf

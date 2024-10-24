@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import Image from "../../assets/dashboard/person1.png"
+import Image from "../../assets/profile/p4.png"
 import Content from "./Content";
 import { useCookies } from "react-cookie";
 import APIService from "../Api/APIService";

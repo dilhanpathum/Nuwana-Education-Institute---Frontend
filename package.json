@@ -10,10 +10,13 @@
     "@material-tailwind/react": "^2.1.9",
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
+    "@react-three/drei": "^9.114.3",
+    "@react-three/fiber": "^8.17.10",
     "@syncfusion/ej2-react-buttons": "^25.2.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/three": "^0.169.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
@@ -37,6 +40,7 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "react-webcam": "^7.2.0",
+    "three": "^0.169.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
