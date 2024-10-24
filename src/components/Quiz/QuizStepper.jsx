@@ -12,7 +12,14 @@ import Footer from "../Footer/Footer";
 		const [subjects, setSubjects] = useState([])
 		const navigate = useNavigate()
 		const [token, setToken, removeToken] = useCookies(["mytoken"]);
+		const [monthname, setMonthname] = useState("");
 		useEffect(() => {
+			const today = new Date();
+
+			const thisMonth = today.getMonth() + 1;
+		
+		
+			setMonthname(today.toLocaleString('default', { month: 'long' }));
 			fetchSubjectData()
 		}, [])
 
@@ -115,7 +122,7 @@ import Footer from "../Footer/Footer";
 			<Header/>
 			<section className="mt-5">
 				<h3 style={{ color: "GrayText" }} className="mb-4">
-					Welcome to online quiz 
+					Welcome to online quiz - {monthname}
 				</h3>
 				{renderProgressBar()}
 				<div className="card">

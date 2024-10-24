@@ -26,7 +26,7 @@ const Payment = () => {
   const [hash, setHash] = useState();
   const [order_id, setOrder_id] = useState();
   const [currency, setCurrency] = useState();
-
+  const [toastShown, setToastShown] = useState(false);
   
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -36,12 +36,16 @@ const Payment = () => {
   const query = useQuery();
 
   useEffect(() => {
-    if (query.get("pay") === "1") {
-      toast.success("Payment completed successfully!");
-    } else if (query.get("pay") === "2") {
-      toast.error("Payment was dismissed. Please try again.");
+    if (!toastShown) {  
+      if (query.get("pay") === "1") {
+        toast.success("Payment completed successfully!");
+        setToastShown(true);  
+      } else if (query.get("pay") === "2") {
+        toast.error("Payment was dismissed. Please try again.");
+        setToastShown(true);  
+      }
     }
-  }, [query]);
+  }, [query, toastShown]);
   useEffect(() => {
     if (token["mytoken"] != null) {
       const emailToken = jwtDecode(token["mytoken"]).sub;
@@ -167,7 +171,7 @@ const Payment = () => {
               <div className="w-full space-y-6">
                 <div className="w-full">
                   <div className="relative">
-                    <h2>Class Fee</h2>
+                    <h2>Class Payment</h2>
                     <label className="text-gray-700" htmlFor="student-name">
                       Student Name
                     </label>

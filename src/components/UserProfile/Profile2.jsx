@@ -53,7 +53,7 @@ export default function Profile2() {
 
 
       setMonthname(today.toLocaleString('default', { month: 'long' }));
-    
+    console.log(token["mytoken"])
           APIService.GetAttendennce(token["mytoken"],{id:id})
             .then((resp) => {
               console.log(resp)
