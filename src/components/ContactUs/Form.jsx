@@ -33,7 +33,7 @@ const handleSubmit = (e) => {
 <Header/>
 
    {/*Contact Start */}
-    <div className="container-xxl py-5">
+    <div className="py-5 container-xxl">
         <div className="container">
             <div className="text-center" >
                 <h6 className="text-primary text-uppercase"> Contact Us </h6>
@@ -43,19 +43,19 @@ const handleSubmit = (e) => {
                 <div className="col-12">
                     <div className="row gy-4">
                         <div class="col-md-4">
-                            <div className="bg-gray-300 d-flex flex-column justify-content-center p-4">
+                            <div className="p-4 bg-gray-300 d-flex flex-column justify-content-center">
                                 <h5 className="text-uppercase">Email</h5>
                                 <p className="m-0"><i className="fa fa-envelope text-primary me-2" aria-hidden="true"></i> nuwana@gmail.com</p>
                             </div>
                         </div>
                         <div className="col-md-4">
-                            <div className="bg-gray-300 d-flex flex-column justify-content-center p-4">
+                            <div className="p-4 bg-gray-300 d-flex flex-column justify-content-center">
                                 <h5 className="text-uppercase"> Call</h5>
                                 <p className="m-0"><i className= "fa fa-phone text-primary me-2" aria-hidden="true"></i> +94 715431995</p>
                             </div>
                         </div>
                         <div className="col-md-4">
-                            <div className="bg-gray-300 d-flex flex-column justify-content-center p-4">
+                            <div className="p-4 bg-gray-300 d-flex flex-column justify-content-center">
                                 <h5 className="text-uppercase"> Open Hours </h5>
                                 <p className="m-0"><i className="fa fa-clock text-primary me-2" aria-hidden="true"  ></i> Saterday-SUnday:
 07:00 AM - 09.00 PM</p>
@@ -64,9 +64,9 @@ const handleSubmit = (e) => {
                     </div>
                 </div>
                 <div className="col-md-6 " >
-                <iframe className="position-relative rounded w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7929.406736882674!2d80.53506968471344!3d5.954258186169264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25eb06ba6d593%3A0x1ad4e6c30e33240c!2sYatiyana%2C%20Matara%2C%20Sri%20Lanka!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd" frameBorder="0" style={{ minHeight: '350px', border: '0' }} allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>
+                <iframe className="rounded position-relative w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.0127288784536!2d80.00641679540828!3d7.210919941389967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2e477a6e0c509%3A0x3a15c12440e5570b!2sNuwana%20Higher%20Educational%20Institute!5e0!3m2!1sen!2slk!4v1729700844633!5m2!1sen!2slk" frameBorder="0" style={{ minHeight: '350px', border: '0' }} allowFullScreen="" aria-hidden="false" tabIndex="0"></iframe>
 
-                
+                {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d467.0127288784536!2d80.00641679540828!3d7.210919941389967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2e477a6e0c509%3A0x3a15c12440e5570b!2sNuwana%20Higher%20Educational%20Institute!5e0!3m2!1sen!2slk!4v1729700844633!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> */}
                 
                 </div>
                 <div className="col-md-6">
@@ -99,7 +99,7 @@ const handleSubmit = (e) => {
                                     </div>
                                 </div>
                                 <div className="col-12">
-                                    <button className="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                    <button className="py-3 btn btn-primary w-100" type="submit">Send Message</button>
                                 </div>
                             </div>
                         </form>

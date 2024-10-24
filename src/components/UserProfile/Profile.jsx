@@ -95,16 +95,9 @@ export default function Profile() {
     series: [
       {
         name: "Maths",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 95, 25, 64, 100],
+        data: [10, 40, 30, 50, 40, 60, 60, 90, 90, 100],
       },
-      {
-        name: "Science",
-        data: [12, 41, 24, 66, 12, 76, 24, 21, 35, 97, 88, 98],
-      },
-      {
-        name: "English",
-        data: [45, 56, 83, 32, 16, 27, 87, 85, 90, 75, 88, 86],
-      },
+      
     ],
     options: {
       chart: {

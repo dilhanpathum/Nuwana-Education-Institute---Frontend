@@ -13,6 +13,7 @@ function Header() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [id, setId] = useState("");
   const [role,setRole] = useState("");
   const [token, setToken, removeToken] = useCookies(["mytoken"]);
   const location = useLocation();
@@ -28,6 +29,7 @@ function Header() {
           setFirstName(resp.firstname)
           setLastName(resp.lastname)
           setEmail(resp.Email)
+          setId(resp.id)
           setRole(resp.role)
         })
         .catch((error) => 
@@ -48,7 +50,7 @@ function Header() {
       case "teacher-m":
         return profile1;
       case "student":
-        return profile;
+        return require(`../../assets/profile/p4.png`);
       case "admin":
         return profile2;
       default:
@@ -80,11 +82,16 @@ function Header() {
           <Dropdown.Header>
             <span className="block text-sm">{`${firstName} ${lastName}`}</span>
           </Dropdown.Header>
-        {role === "admin" || role === "teacher-m" ?(
-          <Dropdown.Item href="/admin/enrollstudents">Dashboard</Dropdown.Item>
-        ):(
-          <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-        )}
+          {role === "admin" ? (
+                <Dropdown.Item href="/staff/students">Dashboard</Dropdown.Item>
+              ) : role === "teacher-m" ? (
+                <Dropdown.Item href="/admin/enrollstudents">Dashboard</Dropdown.Item>
+              ) : (
+                <>
+                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                <Dropdown.Item href="/Pay">Pay</Dropdown.Item>
+                </>
+              )}
           <Dropdown.Divider />
           <Dropdown.Item onClick={logoutBtn}>Sign out</Dropdown.Item>
         </Dropdown>
@@ -115,11 +122,19 @@ function Header() {
         <Navbar.Link href="/quiz" className={getNavLinkClass("/quiz")}>
           Quiz
         </Navbar.Link>
+        
         </>
         )}
         {token["mytoken"] && role === "teacher-m" && (
           <>
           <Navbar.Link href="/admin/enrollstudents" className={getNavLinkClass("/admin/enrollstudents")}>
+          Dashboard
+        </Navbar.Link>
+          </>
+        )}
+        {token["mytoken"] && role === "admin" && (
+          <>
+          <Navbar.Link href="/staff/students" className={getNavLinkClass("/staff/students")}>
           Dashboard
         </Navbar.Link>
           </>
@@ -130,7 +145,7 @@ function Header() {
         <Navbar.Link href="/gallery" className={getNavLinkClass("/gallery")}>
           Gallery
         </Navbar.Link>
-        <Navbar.Link href="/virtualtour" className={getNavLinkClass("/virtualtour")}>
+        <Navbar.Link href="/class" className={getNavLinkClass("/class")}>
           Virtual Tour
         </Navbar.Link>
         <Navbar.Link href="/contact" className={getNavLinkClass("/contact")}>

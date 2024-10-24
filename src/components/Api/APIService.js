@@ -63,7 +63,7 @@ export default class APIService {
   }
 
 
-  static GetStudents(token){
+  static Pending(token){
 
     return fetch(baseUrl+'students', {
      'method' : 'GET',
@@ -72,6 +72,7 @@ export default class APIService {
         'Authorization' : `Bearer ${token}`
      },
     }).then(resp => resp.json())
+    
   }
 
   static updateStatus(token,body){
@@ -108,9 +109,9 @@ export default class APIService {
     }).then(resp => resp.json())
   }
 
-  static GetStudents(token){
+  static GetAllStudents(token){
 
-    return fetch(baseUrl+'allClassStudents', {
+    return fetch(baseUrl+'allStudents', {
      'method' : 'GET',
      headers:{
         'Content-Type' : 'application/json',
@@ -128,6 +129,54 @@ export default class APIService {
         'Authorization' : `Bearer ${token}`
      },
      body:JSON.stringify(body)
+    }).then(resp => resp.json())
+  }
+
+
+  static payment(token){
+
+    return fetch(baseUrl+'payment', {
+     'method' : 'GET',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+    }).then(resp => resp.json())
+  }
+
+  static feedback(token,score){
+    
+    console.log(score)
+    return fetch(baseUrl+`chat?prompt=${score}`, {
+     'method' : 'GET',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+    }).then(resp => resp.json())
+  }
+
+  static saveMarks(token,body){
+    console.log(body)
+
+    return fetch(baseUrl+'saveMarks', {
+     'method' : 'Post',
+     headers:{
+        'Content-Type' : 'application/json',
+        'Authorization' : `Bearer ${token}`
+     },
+     body:JSON.stringify(body)
+    }).then(resp => resp.json())
+  }
+
+  static getMarks(token){
+    
+    return fetch(baseUrl+'getMarks', {
+     'method' : 'GET',
+     headers:{
+        'Content-Type' : 'application/json',
+
+     },
     }).then(resp => resp.json())
   }
 }
