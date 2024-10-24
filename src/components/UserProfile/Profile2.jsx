@@ -25,7 +25,7 @@ import ReactApexChart from "react-apexcharts";
 import "../../styles/profilepic.css";
 import QRCode from "qrcode.react";
 import { useCookies } from "react-cookie";
-import profilePic from '../../assets/profile/p3.jpg'
+import profilePic from '../../assets/profile/p4.png'
 import APIService from "../Api/APIService";
 import { useParams } from 'react-router-dom';
 
@@ -35,6 +35,7 @@ export default function Profile2() {
     const [email, setEmail] = useState("");
     const [role,setRole] = useState("");
     const [contact,setContact] = useState("");
+    const [monthname, setMonthname] = useState("");
     const [token, setToken, removeToken] = useCookies(["mytoken"]);
     const [url,setUrl] = useState("");
     const [isEditing, setIsEditing] = useState(false);
@@ -46,7 +47,12 @@ export default function Profile2() {
 
     const label = { inputProps: { "aria-label": "Checkbox demo" } };
     useEffect(() => {
-    
+      const today = new Date();
+
+      const thisMonth = today.getMonth() + 1;
+
+
+      setMonthname(today.toLocaleString('default', { month: 'long' }));
     
           APIService.GetAttendennce(token["mytoken"],{id:id})
             .then((resp) => {
@@ -78,20 +84,13 @@ export default function Profile2() {
         document.body.removeChild(downloadLink);
     };
     const [state, setState] = useState({
-        series: [
-            {
-                name: "Maths",
-                data: [10, 41, 35, 51, 49, 62, 69, 91, 95, 25, 64, 100],
-            },
-            {
-                name: "Science",
-                data: [12, 41, 24, 66, 12, 76, 24, 21, 35, 97, 88, 98],
-            },
-            {
-                name: "English",
-                data: [45, 56, 83, 32, 16, 27, 87, 85, 90, 75, 88, 86],
-            },
-        ],
+      series: [
+        {
+          name: "Maths",
+          data: [10, 40, 30, 50, 40, 60, 60, 90, 90, 100],
+        },
+        
+      ],
         options: {
             chart: {
                 height: 350,
@@ -142,7 +141,7 @@ export default function Profile2() {
                 <div class="py-8">
                     <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
                         <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
-                            <h1 className="px-5 py-3">Attendance Mark : July</h1>
+                            <h1 className="px-5 py-3">Attendance Mark : {monthname}</h1>
                             <table class="min-w-full leading-normal m-0.5">
                                 <thead>
                                     <tr>
@@ -311,9 +310,9 @@ export default function Profile2() {
                   <div class="profile-pic">
                     <label class="-label" for="file">
                       <span class="glyphicon glyphicon-camera"></span>
-                      <span>Change Image</span>
+                      
                     </label>
-                    <input id="file" type="file" name="propic" accept=".png, .jpg, .jpeg" onChange={loadFile} />
+                    
                     <img
                       src={profilePic}
                       id="output"

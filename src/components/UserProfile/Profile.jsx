@@ -21,7 +21,7 @@ import Footer from "../Footer/Footer";
 import ReactApexChart from "react-apexcharts";
 import '../../styles/profilepic.css'
 import QRCode from "qrcode.react";
-import profilePic from '../../assets/profile/p3.jpg'
+import profilePic from '../../assets/profile/p4.png'
 import APIService from "../Api/APIService";
 import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
